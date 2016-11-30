@@ -1,0 +1,7 @@
+app:
+    resource: "@BaboonAppBundle/Controller/"
+    type:     annotation
+
+dashboard:
+    resource: "@BaboonPanelBundle/Controller/"
+    type:     annotation
