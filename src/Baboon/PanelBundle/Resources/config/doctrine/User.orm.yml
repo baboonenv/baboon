@@ -1,0 +1,8 @@
+Baboon\PanelBundle\Entity\User:
+    type:  entity
+    table: bb_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO

@@ -41,7 +41,7 @@
         <!--logo end-->
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="login.html">Logout</a></li>
+                <li><a class="logout" href="{{ path('fos_user_security_logout') }}">Logout</a></li>
             </ul>
         </div>
     </header>
@@ -57,7 +57,7 @@
             <ul class="sidebar-menu" id="nav-accordion">
 
                 <p class="centered"><a href="profile.html"><img src="{{ asset('/bundles/baboonpanel/img/ui-sam.jpg') }}" class="img-circle" width="60"></a></p>
-                <h5 class="centered">Marcel Newman</h5>
+                <h5 class="centered">@{{ app.user.username }}</h5>
 
                 <li class="mt">
                     <a href="index.html">
