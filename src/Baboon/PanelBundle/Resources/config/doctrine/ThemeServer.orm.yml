@@ -1,0 +1,18 @@
+Baboon\PanelBundle\Entity\ThemeServer:
+    type: entity
+    table: bb_theme_server
+    repositoryClass: Baboon\PanelBundle\Entity\ThemeServerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: true
+        url:
+            type: string
+            nullable: false
+
