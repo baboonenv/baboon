@@ -81,6 +81,26 @@ class ThemesController extends Controller
     }
 
     /**
+     * @Route("/sync/theme", name="bb_theme_sync")
+     */
+    public function syncThemeAction(Request $request)
+    {
+        $m = new \Mustache_Engine();
+        $rootDir = $this->get('kernel')->getRootDir();
+        $indexFile = $rootDir.'/../web/themes/383/baboon-default-theme-master/index.html';
+        $fileContent = file_get_contents($indexFile);
+        $renderedTemplate = $m->render($fileContent, [
+            'data' => [
+                'enter_text' => 'Hello Bitch',
+                'enter_paragraph' => 'Paragraph bitch. i am behram.',
+            ]
+        ]);
+        file_put_contents($indexFile, $renderedTemplate);
+
+        return new Response('successful');
+    }
+
+    /**
      * @Route("/dashboard/themes/add-server", name="bb_themes_add_server")
      */
     public function addServerAction(Request $request)
