@@ -1,0 +1,29 @@
+{% extends 'BaboonPanelBundle:Base:base.html.twig' %}
+
+{% block title %}
+    Themes
+{% endblock %}
+
+{% block content %}
+    {{ form(add_server_form) }}
+    <hr>
+    <select onchange="BaboonPanel.loadServerCategories(this)">
+        <option></option>
+        {% for server in servers %}
+            <option data-categories-href="{{ path('bb_themes_server_categories', {id: server.id}) }}">{{ server.name }}</option>
+        {% endfor %}
+    </select>
+    <hr>
+    <div id="categories-box">
+
+    </div>
+    <hr>
+    <div id="themes-box">
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('/bundles/baboonpanel/js/panel/baboon.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+<ul data-enable-action="{{ path('bb_category_themes_enable') }}">
+    {% for theme in themes %}
+        <li>
+            {{ theme.themeName }} ->
+            <button onclick="BaboonPanel.enableTheme(this)" class="btn btn-primary btn-xs" data-zip-url="{{ theme.zipUrl }}">
+                Download and Enable
+            </button>
+        </li>
+    {% endfor %}
+</ul>
