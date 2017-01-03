@@ -4,10 +4,9 @@ namespace Baboon\PanelBundle\Controller;
 
 use Baboon\PanelBundle\Entity\ThemeServer;
 use Baboon\PanelBundle\Form\ThemeServerType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ConfigurationController extends Controller
 {
