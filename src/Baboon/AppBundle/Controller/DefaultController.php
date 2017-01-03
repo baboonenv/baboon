@@ -20,7 +20,7 @@ class DefaultController extends Controller
         $path = $this->get('request_stack')->getMasterRequest()->getPathInfo();
         $pathInfo = pathinfo($path);
         $appDir = $this->get('kernel')->getRootDir();
-        $resultDir = $appDir.'/../web/_site/'.$path;
+        $resultDir = $appDir.'/../web/_site/_render/'.$path;
         if(!isset($pathInfo['extension'])){
             $resultDir = $resultDir.'/index.html';
         }

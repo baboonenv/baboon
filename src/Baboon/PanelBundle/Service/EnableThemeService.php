@@ -68,19 +68,19 @@ class EnableThemeService
         $this->setupVars($zipUri);
         $zipFileContent = $this->getContent($this->themeZipUri);
         $this->createDir($this->themeDir);
-        $this->deleteDir($this->siteDir);
-        $this->createDir($this->siteDir);
+        $this->setupSiteDirs();
 
         file_put_contents($this->cloneThemePath, $zipFileContent);
         $zip = new \ZipArchive();
         $res = $zip->open($this->cloneThemePath);
         if ($res === TRUE) {
             $zip->extractTo($this->themeDir);
-            $zip->extractTo($this->siteDir);
             $zip->close();
             unlink($this->cloneThemePath);
         }
         $this->normalizeThemeDir();
+        $this->moveFilesToDir($this->themeDir, $this->siteDir.'_source/', false);
+        $this->moveFilesToDir($this->themeDir, $this->siteDir.'_render/', false);
 
         return true;
     }
@@ -99,6 +99,14 @@ class EnableThemeService
         $this->cloneThemePath = $this->themeDir.'theme_clone.zip';
     }
 
+    private function setupSiteDirs()
+    {
+        $this->deleteDir($this->siteDir);
+        $this->createDir($this->siteDir);
+        $this->createDir($this->siteDir.'_source/');
+        $this->createDir($this->siteDir.'_render/');
+    }
+
     /**
      * @return bool
      */
@@ -113,7 +121,6 @@ class EnableThemeService
                 $this->themeDir .=  $item;
                 if($this->haveBaboonConfiguration($this->themeDir)){
                     $this->moveFilesToDir($this->themeDir, $this->themeRealDir);
-                    $this->deleteDir($this->themeDir);
                     $this->themeDir = $this->themeRealDir;
 
                     return true;
@@ -129,9 +136,11 @@ class EnableThemeService
     /**
      * @param string $path1
      * @param string $path2
+     * @param bool $removeFirstDir
+     *
      * @return bool
      */
-    private function moveFilesToDir(string $path1, string $path2)
+    private function moveFilesToDir(string $path1, string $path2, $removeFirstDir = true)
     {
         $path1 = realpath($path1);
         $path2 = realpath($path2);
@@ -143,6 +152,9 @@ class EnableThemeService
                 $this->createDir($copyPathInfo['dirname']);
                 copy($itemPath, $copyPath);
             }
+        }
+        if($removeFirstDir){
+            $this->deleteDir($path1);
         }
 
         return true;
