@@ -6,7 +6,6 @@ dashboard:
     resource: "@BaboonPanelBundle/Controller/"
     type:     annotation
 
-
 app_main:
     path    : /
     defaults: { _controller: "BaboonAppBundle:Default:index" }

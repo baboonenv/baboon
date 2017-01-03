@@ -61,20 +61,12 @@ class ThemesController extends Controller
      */
     public function enableThemeCategoriesAction(Request $request)
     {
-        $zipUrl = $request->request->get('zip');
-        $zipFileContent = file_get_contents($zipUrl);
-        $rootDir = $this->get('kernel')->getRootDir();
-        $clonedFile = $rootDir.'/../web/themes/theme_clone.zip';
-        $themeDir = $rootDir.'/../web/themes/'.rand(100,999).'/';
-        mkdir($themeDir);
-        file_put_contents($clonedFile, $zipFileContent);
+        $enableThemeService = $this->get('baboon.panel.enable_theme_service');
+        $zipUri = $request->request->get('zip');
+        $enable = $enableThemeService->downloadAndEnableTheme($zipUri);
 
-        $zip = new \ZipArchive();
-        $res = $zip->open($clonedFile);
-        if ($res === TRUE) {
-            $zip->extractTo($themeDir);
-            $zip->close();
-            unlink($clonedFile);
+        if(!$enable){
+            return new Response('Some error occured');
         }
 
         return new Response('successful');
