@@ -43,3 +43,7 @@
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+
+# baboon site related dirs
+/web/_site/
+/web/_themes/
