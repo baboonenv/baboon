@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ThemesController extends Controller
 {
     /**
-     * @Route("/dashboard/themes", name="bb_themes")
+     * @Route("/themes", name="bb_themes")
      */
     public function themesAction(Request $request)
     {
@@ -30,7 +30,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/dashboard/themes/server/{id}/categories", name="bb_themes_server_categories")
+     * @Route("/themes/server/{id}/categories", name="bb_themes_server_categories")
      */
     public function serverCategoriesAction(Request $request, ThemeServer $server)
     {
@@ -44,7 +44,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/dashboard/themes/category/themes", name="bb_category_themes")
+     * @Route("/themes/category/themes", name="bb_category_themes")
      */
     public function categoryThemesCategoriesAction(Request $request)
     {
@@ -57,7 +57,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/dashboard/themes/category/themes/enable", name="bb_category_themes_enable")
+     * @Route("/themes/category/themes/enable", name="bb_category_themes_enable")
      */
     public function enableThemeCategoriesAction(Request $request)
     {
@@ -101,7 +101,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/dashboard/themes/add-server", name="bb_themes_add_server")
+     * @Route("/themes/add-server", name="bb_themes_add_server")
      */
     public function addServerAction(Request $request)
     {
