@@ -2,20 +2,34 @@
 
 namespace Baboon\AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @param Request $request
+     * @param null $path
+     *
+     * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $path = null)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+        $path = $this->get('request_stack')->getMasterRequest()->getPathInfo();
+        $pathInfo = pathinfo($path);
+        $appDir = $this->get('kernel')->getRootDir();
+        $resultDir = $appDir.'/../web/_site/'.$path;
+        if(!isset($pathInfo['extension'])){
+            $resultDir = $resultDir.'/index.html';
+        }
+        $resultDir = preg_replace('#/+#','/',$resultDir);
+        if(!file_exists($resultDir)){
+            throw new NotFoundHttpException('File can not be found');
+        }
+        $content = file_get_contents($resultDir);
+
+        return new Response($content);
     }
 }

@@ -1,10 +1,20 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-app:
-    resource: "@BaboonAppBundle/Controller/"
-    type:     annotation
-
 dashboard:
+    prefix:   "/dashboard"
     resource: "@BaboonPanelBundle/Controller/"
     type:     annotation
+
+
+app_main:
+    path    : /
+    defaults: { _controller: "BaboonAppBundle:Default:index" }
+    condition: 'not (context.getPathInfo() matches "/_site/")'
+
+app:
+    path:     /{path}
+    defaults: { _controller: "BaboonAppBundle:Default:index" }
+    condition: 'not (context.getPathInfo() matches "/_site/")'
+    requirements:
+        path: .+
