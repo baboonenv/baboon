@@ -7,24 +7,24 @@ use Baboon\PanelBundle\Form\ThemeServerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Yaml\Yaml;
 
 class ConfigurationController extends Controller
 {
     /**
      * @Route("/configuration", name="bb_configuration")
      */
-    public function themesAction(Request $request)
+    public function configurationAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $servers = $em->getRepository(ThemeServer::class)->findAll();
-        $addServerForm = $this->createForm(ThemeServerType::class, new ThemeServer(), [
-            'action' => $this->generateUrl('bb_themes_add_server'),
-            'method' => 'POST',
-        ]);
+        $rootDir = $this->get('kernel')->getRootDir();
+        $baboonConfFile = $rootDir.'/../web/_site/_source/.baboon.yml';
+        if(!file_exists($baboonConfFile)){
+            return $this->redirectToRoute('bb_themes');
+        }
+        $baboonConf = Yaml::parse(file_get_contents($baboonConfFile));
 
-        return $this->render('BaboonPanelBundle:Themes:index.html.twig', [
-            'servers' => $servers,
-            'add_server_form' => $addServerForm->createView(),
+        return $this->render('BaboonPanelBundle:Configuration:index.html.twig', [
+            'baboonConf' => $baboonConf,
         ]);
     }
 }

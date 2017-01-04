@@ -1,0 +1,18 @@
+{% extends 'BaboonPanelBundle:Base:base.html.twig' %}
+
+{% block title %}
+    Configuration
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <h1>
+        {{ dump(baboonConf.assets) }}
+    </h1>
+
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+    <script src="{{ asset('/bundles/baboonpanel/js/panel/baboon.js') }}"></script>
+{% endblock %}
