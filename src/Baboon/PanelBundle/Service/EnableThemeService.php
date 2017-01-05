@@ -5,7 +5,8 @@ namespace Baboon\PanelBundle\Service;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Common methods for journal
+ * Class EnableThemeService
+ * @package Baboon\PanelBundle\Service
  */
 class EnableThemeService
 {
