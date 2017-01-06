@@ -127,7 +127,7 @@ class EnableThemeService
             $baboonData['assets'][$assetKey] = $asset;
         }
 
-        file_put_contents($this->siteDir.'baboon.data.json', json_encode($baboonData));
+        file_put_contents($this->siteDir.'data.json', json_encode($baboonData));
 
         return true;
     }
