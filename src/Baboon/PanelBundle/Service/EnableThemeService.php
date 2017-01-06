@@ -3,6 +3,7 @@
 namespace Baboon\PanelBundle\Service;
 
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class EnableThemeService
@@ -82,6 +83,7 @@ class EnableThemeService
         $this->normalizeThemeDir();
         $this->moveFilesToDir($this->themeDir, $this->siteDir.'_source/', false);
         $this->moveFilesToDir($this->themeDir, $this->siteDir.'_render/', false);
+        $this->generateDataFile();
 
         return true;
     }
@@ -106,6 +108,28 @@ class EnableThemeService
         $this->createDir($this->siteDir);
         $this->createDir($this->siteDir.'_source/');
         $this->createDir($this->siteDir.'_render/');
+    }
+
+    /**
+     * @return bool
+     */
+    private function generateDataFile()
+    {
+        $baboonData = Yaml::parse(file_get_contents($this->siteDir.'_source/.baboon.yml'));
+        foreach ($baboonData['assets'] as $assetKey => $asset){
+            if(isset($asset['multiple']) && $asset['multiple'] == true){
+                $asset['value'] = [];
+            }else{
+                $asset['value'] = $asset['default'];
+            }
+            $asset['isDefaultValue'] = true;
+
+            $baboonData['assets'][$assetKey] = $asset;
+        }
+
+        file_put_contents($this->siteDir.'baboon.data.json', json_encode($baboonData));
+
+        return true;
     }
 
     /**

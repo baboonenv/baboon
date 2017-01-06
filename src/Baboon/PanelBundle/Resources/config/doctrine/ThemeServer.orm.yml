@@ -15,4 +15,3 @@ Baboon\PanelBundle\Entity\ThemeServer:
         url:
             type: string
             nullable: false
-
