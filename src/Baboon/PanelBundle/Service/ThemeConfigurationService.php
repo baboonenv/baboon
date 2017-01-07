@@ -25,5 +25,15 @@ class ThemeConfigurationService
         $this->kernel = $kernel;
     }
 
+    public function collectConfigurationData()
+    {
+        $dataArray = json_decode(file_get_contents($this->getDataFile()), true);
 
+        return $dataArray;
+    }
+
+    public function getDataFile()
+    {
+        return $this->kernel->getRootDir().'/../web/_site/data.json';
+    }
 }

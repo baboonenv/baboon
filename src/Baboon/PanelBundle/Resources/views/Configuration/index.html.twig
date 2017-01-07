@@ -5,8 +5,24 @@
 {% endblock %}
 
 {% block content %}
-    <hr>
-
+    {% for asset in data.assets %}
+        <div class="well well-sm col-sm-12">
+            {% if asset.isDefaultValue %}
+                <span class="label label-warning label-xs pull-right">
+                     {{ 'using.default' }}
+                </span>
+            {% endif %}
+            <legend class="col-sm-11">
+                {{ asset.label }}
+            </legend>
+            <div class="col-sm-12">
+                {% if asset.multiple is defined %}
+                {% else %}
+                    {{ 'value'|trans }}:{{ asset.value|raw }}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 {% block script %}

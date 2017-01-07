@@ -16,15 +16,10 @@ class ConfigurationController extends Controller
      */
     public function configurationAction(Request $request)
     {
-        $rootDir = $this->get('kernel')->getRootDir();
-        $baboonConfFile = $rootDir.'/../web/_site/_source/.baboon.yml';
-        if(!file_exists($baboonConfFile)){
-            return $this->redirectToRoute('bb_themes');
-        }
-        $baboonConf = Yaml::parse(file_get_contents($baboonConfFile));
+        $configurationService = $this->get('baboon.panel.theme_configuration_service');
 
         return $this->render('BaboonPanelBundle:Configuration:index.html.twig', [
-            'baboonConf' => $baboonConf,
+            'data' => $configurationService->collectConfigurationData(),
         ]);
     }
 }
