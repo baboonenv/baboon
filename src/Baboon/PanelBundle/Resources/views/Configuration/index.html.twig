@@ -16,10 +16,7 @@
                 {{ asset.label }}
             </legend>
             <div class="col-sm-12">
-                {% if asset.multiple is defined %}
-                {% else %}
-                    {{ 'value'|trans }}:{{ asset.value|raw }}
-                {% endif %}
+                {{ include('BaboonPanelBundle:Configuration/_assets:_'~asset.type~'.html.twig') }}
             </div>
         </div>
     {% endfor %}

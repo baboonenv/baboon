@@ -117,11 +117,7 @@ class EnableThemeService
     {
         $baboonData = Yaml::parse(file_get_contents($this->siteDir.'_source/.baboon.yml'));
         foreach ($baboonData['assets'] as $assetKey => $asset){
-            if(isset($asset['multiple']) && $asset['multiple'] == true){
-                $asset['value'] = [];
-            }else{
-                $asset['value'] = $asset['default'];
-            }
+            $asset['value'] = $asset['default'];
             $asset['isDefaultValue'] = true;
 
             $baboonData['assets'][$assetKey] = $asset;
