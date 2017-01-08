@@ -1,0 +1,42 @@
+{
+  "name": "baboon/baboon",
+  "version": "0.0.1",
+  "homepage": "http://behram.org",
+  "authors": [
+    "Behram ÇELEN <behramcelen@gmail.com>",
+    "https://github.com/ojs/ojs/graphs/contributors"
+  ],
+  "description": "Baboon",
+  "license": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.4",
+    "bootstrap": "3.3.5",
+    "font-awesome": "4.4.0",
+    "summernote": "*",
+    "select2": "4.*",
+    "jquery-file-upload": "*",
+    "jquery.inputmask": "*",
+    "cropper": "0.7.9",
+    "bootstrap-treeview": "*",
+    "jquery-locationpicker-plugin": "*",
+    "gridmanager.js": "*",
+    "ace-builds": "*",
+    "ace": "*",
+    "sweetalert": "v1.1.0",
+    "downloadjs": "*",
+    "fancybox": "^2.1.5",
+    "jquery-ui": "*"
+  },
+  "resolutions": {
+    "font-awesome": "4.4.0",
+    "jquery": "2.2.4"
+  }
+}
