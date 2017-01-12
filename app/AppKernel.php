@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             new Baboon\AppBundle\BaboonAppBundle(),
             new Baboon\PanelBundle\BaboonPanelBundle(),
