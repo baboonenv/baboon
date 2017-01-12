@@ -1,10 +1,12 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-dashboard:
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+bb_panel:
     prefix:   "/dashboard"
-    resource: "@BaboonPanelBundle/Controller/"
-    type:     annotation
+    resource: "@BaboonPanelBundle/Resources/config/routing.yml"
 
 app_main:
     path    : /

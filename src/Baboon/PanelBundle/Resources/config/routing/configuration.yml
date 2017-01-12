@@ -1,0 +1,3 @@
+bb_panel_configuration:
+    path:     /
+    defaults: { _controller: BaboonPanelBundle:Configuration:configuration }

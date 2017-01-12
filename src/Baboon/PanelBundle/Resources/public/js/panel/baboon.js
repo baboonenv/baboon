@@ -31,6 +31,8 @@ $(document).ready(function() {
             $.post($actionUrl, {zip: $zipUrl} ,function(data){
                 alert(data);
             });
+        },
+        configureField: function ($this) {
         }
     };
 });

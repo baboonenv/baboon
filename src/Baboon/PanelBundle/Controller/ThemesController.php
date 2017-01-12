@@ -8,11 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ThemesController extends Controller
 {
     /**
-     * @Route("/themes", name="bb_themes")
+     * @param Request $request
+     * @return Response
      */
     public function themesAction(Request $request)
     {
@@ -30,7 +32,9 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/themes/server/{id}/categories", name="bb_themes_server_categories")
+     * @param Request $request
+     * @param ThemeServer $server
+     * @return Response
      */
     public function serverCategoriesAction(Request $request, ThemeServer $server)
     {
@@ -44,7 +48,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/themes/category/themes", name="bb_category_themes")
+     * @param Request $request
+     * @return Response
      */
     public function categoryThemesCategoriesAction(Request $request)
     {
@@ -57,7 +62,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/themes/category/themes/enable", name="bb_category_themes_enable")
+     * @param Request $request
+     * @return Response
      */
     public function enableThemeCategoriesAction(Request $request)
     {
@@ -73,7 +79,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/sync/theme", name="bb_theme_sync")
+     * @param Request $request
+     * @return Response
      */
     public function syncThemeAction(Request $request)
     {
@@ -93,7 +100,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Route("/themes/add-server", name="bb_themes_add_server")
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function addServerAction(Request $request)
     {

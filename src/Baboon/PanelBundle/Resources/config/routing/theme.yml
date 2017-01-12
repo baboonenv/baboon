@@ -1,0 +1,23 @@
+bb_themes:
+    path:     /themes
+    defaults: { _controller: BaboonPanelBundle:Themes:themes }
+
+bb_themes_server_categories:
+    path:     /themes/server/{id}/categories
+    defaults: { _controller: BaboonPanelBundle:Themes:serverCategories }
+
+bb_category_themes:
+    path:     /themes/category/themes
+    defaults: { _controller: BaboonPanelBundle:Themes:categoryThemesCategories }
+
+bb_category_themes_enable:
+    path:     /themes/category/themes/enable
+    defaults: { _controller: BaboonPanelBundle:Themes:enableThemeCategories }
+
+bb_theme_sync:
+    path:     /sync/theme
+    defaults: { _controller: BaboonPanelBundle:Themes:syncTheme }
+
+bb_themes_add_server:
+    path:     /themes/add-server
+    defaults: { _controller: BaboonPanelBundle:Themes:addServer }

@@ -1,0 +1,11 @@
+bb_panel_dashboard:
+    path:     /
+    defaults: { _controller: BaboonPanelBundle:Dashboard:index }
+
+bb_panel_configuration:
+    prefix:   "/configuration"
+    resource: "@BaboonPanelBundle/Resources/config/routing/configuration.yml"
+
+bb_panel_theme:
+    prefix:   "/"
+    resource: "@BaboonPanelBundle/Resources/config/routing/theme.yml"
