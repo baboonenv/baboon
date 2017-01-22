@@ -1,11 +1,11 @@
 <div class="well well-sm">
     <legend class="text-center">{{ 'configure' }}: {{ asset.label }}</legend>
-    <textarea class="form-control" rows="10">
+    <textarea class="form-control" rows="10" id="asset-data-wrap">
         {{ asset.value }}
     </textarea>
     <br>
     <div class="well well-sm">
-        <button class="btn btn-sm btn-primary pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ assetKey }}')">
             {{ 'save.value'|trans }}
         </button>
         <br>

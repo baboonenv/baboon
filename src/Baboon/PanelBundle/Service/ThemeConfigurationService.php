@@ -32,6 +32,13 @@ class ThemeConfigurationService
         return $dataArray;
     }
 
+    public function saveConfigurationData($confData)
+    {
+        file_put_contents($this->getDataFile(), json_encode($confData));
+
+        return true;
+    }
+
     public function getDataFile()
     {
         return $this->kernel->getRootDir().'/../web/_site/data.json';

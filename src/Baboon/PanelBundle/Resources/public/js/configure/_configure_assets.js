@@ -11,6 +11,23 @@ $(document).ready(function() {
                 maxWidth: '600px',
                 height: 'auto'
             });
+        },
+        saveAssetValue: function ($this, $assetKey) {
+            var savePath = Routing.generate('bb_panel_field_save_asset_value');
+            var value = $('#asset-data-wrap').val();
+            $.post(savePath, {
+                assetKey: $assetKey,
+                value   : value
+            }, function(data){
+                if(data.success == true){
+                    noty({
+                        type: 'success',
+                        text: 'Asset field value successfully updated!'
+                    });
+                    $.fancybox.close();
+                }
+            });
+
         }
     };
 });

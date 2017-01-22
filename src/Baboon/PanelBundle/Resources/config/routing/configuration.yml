@@ -7,3 +7,9 @@ bb_panel_field_configure:
     defaults: { _controller: BaboonPanelBundle:Configuration:configure }
     options:
         expose: true
+
+bb_panel_field_save_asset_value:
+    path:     /configure/save/asset/value
+    defaults: { _controller: BaboonPanelBundle:Configuration:saveAssetValue }
+    options:
+        expose: true
