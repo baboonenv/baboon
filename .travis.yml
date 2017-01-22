@@ -23,4 +23,4 @@ script:
   - phpunit -c phpunit.xml
 
 notifications:
-  slack: deepkod:8GtvUiq3935dZRc1SObHJVcR#baboon
+  slack: deepkod:3mFVJfNiCfoG3eGw3V4kD7PX#baboon
