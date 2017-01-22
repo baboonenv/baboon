@@ -13,3 +13,9 @@ bb_panel_field_save_asset_value:
     defaults: { _controller: BaboonPanelBundle:Configuration:saveAssetValue }
     options:
         expose: true
+
+bb_panel_get_asset_wrap:
+    path:     /configure/get/asset/{assetKey}/wrap
+    defaults: { _controller: BaboonPanelBundle:Configuration:getAssetWrap }
+    options:
+        expose: true

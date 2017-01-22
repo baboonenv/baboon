@@ -24,10 +24,19 @@ $(document).ready(function() {
                         type: 'success',
                         text: 'Asset field value successfully updated!'
                     });
+                    ConfigureAsset.loadAssetWrap($assetKey);
                     $.fancybox.close();
                 }
             });
-
+        },
+        loadAssetWrap: function ($assetKey) {
+            var wrapDiv = $('#asset-'+$assetKey+'-wrap-div');
+            var loadAssetPath = Routing.generate('bb_panel_get_asset_wrap', {
+                'assetKey': $assetKey
+            });
+            $.get(loadAssetPath, function(data){
+                wrapDiv.html(data);
+            });
         }
     };
 });

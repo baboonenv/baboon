@@ -1,0 +1,23 @@
+<div class="col-sm-12">
+    <div class="col-sm-2">
+        <button class="btn btn-primary btn-xs" onclick="ConfigureAsset.configureField(this, '{{ assetKey }}')">
+            <i class="fa fa-cogs"></i>
+            {{ 'configure'|trans }}
+        </button>
+    </div>
+    <div class="col-sm-8 text-center">
+        <legend class="col-sm-11">
+            {{ asset.label }}
+        </legend>
+    </div>
+    <div class="col-sm-2 text-center">
+        {% if asset.isDefaultValue %}
+            <span class="label label-warning label-xs">
+                {{ 'using.default' }}
+            </span>
+        {% endif %}
+    </div>
+</div>
+<div class="col-sm-12">
+    {{ include('BaboonPanelBundle:Configuration/_assets:_'~asset.type~'.html.twig') }}
+</div>

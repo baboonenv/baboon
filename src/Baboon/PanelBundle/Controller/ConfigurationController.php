@@ -51,12 +51,28 @@ class ConfigurationController extends Controller
 
         $confData = $confService->collectConfigurationData();
         $confData['assets'][$assetKey]['value'] = $assetValue;
-        $confData['assets'][$assetKey]['isDefault'] = true;
+        $confData['assets'][$assetKey]['isDefaultValue'] = false;
 
         $confService->saveConfigurationData($confData);
 
         return new JsonResponse([
             'success' => true,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $assetKey
+     * @return Response
+     */
+    public function getAssetWrapAction(Request $request, $assetKey)
+    {
+        $confService = $this->get('baboon.panel.theme_configuration_service');
+        $confData = $confService->collectConfigurationData();
+
+        return $this->render('@BaboonPanel/Configuration/_widgets/_asset_wrap.html.twig', [
+            'asset' => $confData['assets'][$assetKey],
+            'assetKey' => $assetKey,
         ]);
     }
 }
