@@ -31,18 +31,6 @@ $(document).ready(function() {
             $.post($actionUrl, {zip: $zipUrl} ,function(data){
                 alert(data);
             });
-        },
-        configureField: function ($this, $assetKey) {
-            $.fancybox({
-                type: 'ajax',
-                href: Routing.generate('bb_panel_field_configure', {
-                    assetKey: $assetKey
-                }),
-                autoSize: false,
-                width: '600px',
-                maxWidth: '600px',
-                height: 'auto'
-            });
         }
     };
 });
