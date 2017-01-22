@@ -22,7 +22,8 @@ $(document).ready(function() {
                 if(data.success == true){
                     noty({
                         type: 'success',
-                        text: 'Asset field value successfully updated!'
+                        text: 'Asset field value successfully updated!',
+                        timeout: 2000
                     });
                     ConfigureAsset.loadAssetWrap($assetKey);
                     $.fancybox.close();
