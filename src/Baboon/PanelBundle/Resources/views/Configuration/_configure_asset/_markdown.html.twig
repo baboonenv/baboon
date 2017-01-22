@@ -1,9 +1,15 @@
 <div class="well well-sm">
-    {% if asset.multiple is defined %}
-        {% for value in asset.value %}
-            {{ value|markdown }}
-        {% endfor %}
-    {% else %}
-        {{ asset.value }}
-    {% endif %}
+    <legend class="text-center">{{ 'configure' }}: {{ asset.label }}</legend>
+    <textarea class="form-control" rows="10" id="asset-data-wrap" data-provide="markdown">{{ asset.value }}</textarea>
+    <br>
+    <div class="well well-sm">
+        <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ assetKey }}')">
+            {{ 'save.value'|trans }}
+        </button>
+        <br>
+        <br>
+    </div>
 </div>
+<script>
+    $('#asset-data-wrap').markdown({autofocus:true});
+</script>

@@ -1,9 +1,3 @@
 <div class="well well-sm">
-    {% if asset.multiple is defined %}
-        {% for value in asset.value %}
-            {{ value|markdown }}
-        {% endfor %}
-    {% else %}
-        {{ asset.value }}
-    {% endif %}
+    {{ asset.value|markdown }}
 </div>
