@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 7.0
+
+sudo: false
+
+before_install:
+  - npm install -g bower
+
+before_script:
+  - phpenv config-add travis.php.ini
+  - phpenv config-rm xdebug.ini
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - cp ./phpunit.xml.dist ./phpunit.xml
+  - composer install --no-interaction --prefer-dist
+  - bower install --force --silent
+  - php bin/console assetic:dump --env=test
+  - chmod -R 777 var/cache var/logs
+  - composer show
+
+script:
+  - phpunit -c phpunit.xml
+
+notifications:
+  slack: deepkod:8GtvUiq3935dZRc1SObHJVcR#baboon
