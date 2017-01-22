@@ -39,7 +39,7 @@ class ThemesController extends Controller
     public function serverCategoriesAction(Request $request, ThemeServer $server)
     {
         $categoriesUrl = json_decode(file_get_contents($server->getUrl().'/configuration'))->categoriesUrl;
-        $categories = (json_decode(file_get_contents($categoriesUrl)))->categories;
+        $categories = json_decode(file_get_contents($categoriesUrl))->categories;
 
         return $this->render('BaboonPanelBundle:Themes:categories.html.twig', [
             'categories' => $categories,
