@@ -2,7 +2,7 @@
     {% for theme in themes %}
         <li>
             {{ theme.themeName }} ->
-            <button onclick="BaboonPanel.enableTheme(this)" class="btn btn-primary btn-xs" data-zip-url="{{ theme.zipUrl }}">
+            <button onclick="ConfigureTheme.enableTheme(this)" class="btn btn-primary btn-xs" data-zip-url="{{ theme.zipUrl }}">
                 Download and Enable
             </button>
         </li>

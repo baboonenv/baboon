@@ -1,4 +1,4 @@
-<select onchange="BaboonPanel.loadCategoryThemes(this)" data-action-url="{{ path('bb_category_themes') }}">
+<select onchange="ConfigureTheme.loadCategoryThemes(this)" data-action-url="{{ path('bb_category_themes') }}">
     <option></option>
     {% for category in categories %}
         <option data-themes-href="{{ category.themesUrl }}" data-server-id="{{ server.id }}">{{ category.categoryName }}</option>

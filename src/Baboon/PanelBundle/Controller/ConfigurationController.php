@@ -32,7 +32,7 @@ class ConfigurationController extends Controller
         $asset = $configurationService->collectConfigurationData()['assets'][$assetKey];
 
         return $this->render('@BaboonPanel/Configuration/_configure_asset/_'.$asset['type'].'.html.twig', [
-            'asset' => $asset,
+            'asset'     => $asset,
         ]);
     }
 }
