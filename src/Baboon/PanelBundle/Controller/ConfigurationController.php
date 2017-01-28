@@ -78,7 +78,7 @@ class ConfigurationController extends Controller
 
         $confData = $confService->collectConfigurationData();
 
-        if($confData['assets'][$assetKey]['type'] = AssetTypes::IMAGE){
+        if($confData['assets'][$assetKey]['type'] == AssetTypes::IMAGE){
             $assetValue = '/_site/_uploads/croped/'.$assetValue;
         }
         $confData['assets'][$assetKey]['value'] = $assetValue;
