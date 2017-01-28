@@ -27,6 +27,9 @@
         <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css" rel="stylesheet" />
+
+        <!-- date picker related css file -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" />
     {% endblock %}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -122,7 +125,6 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="{{ asset('bundles/baboonpanel/js/jquery.js') }}"></script>
     <script src="{{ asset('bundles/baboonpanel/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bundles/baboonpanel/js/jquery-ui-1.9.2.custom.min.js') }}"></script>
     <script src="{{ asset('bundles/baboonpanel/js/jquery.ui.touch-punch.min.js') }}"></script>
     <script src="{{ asset('bundles/baboonpanel/js/jquery.dcjqaccordion.2.7.js') }}"></script>
     <script src="{{ asset('bundles/baboonpanel/js/jquery.scrollTo.min.js') }}"></script>
@@ -148,6 +150,10 @@
             $('.jb_fileupload').jbFileUpload();
         });
     </script>
+
+    <!-- date picker related js files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 
     <!--common script for all pages-->
     <script src="{{ asset('/bundles/baboonpanel/js/common-scripts.js') }}"></script>

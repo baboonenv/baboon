@@ -1,3 +1,16 @@
 <div class="well well-sm">
-    {{ asset.value }}
+    <legend class="text-center">{{ 'configure' }}: {{ asset.label }}</legend>
+    <input type="text" class="form-control" value="{{ asset.value }}" id="asset-data-wrap">
+    <br>
+    <div class="well well-sm">
+        <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ assetKey }}')">
+            {{ 'save.value'|trans }}
+        </button>
+        <br>
+        <br>
+    </div>
 </div>
+
+<script>
+    $('#asset-data-wrap').datepicker();
+</script>
