@@ -3,11 +3,11 @@ knp_gaufrette:
     adapters:
         image:
             local:
-                directory: "%kernel.root_dir%/../web/uploads"
+                directory: "%kernel.root_dir%/../web/_site/_uploads"
                 create: true
         croped:
             local:
-                directory: "%kernel.root_dir%/../web/uploads/croped"
+                directory: "%kernel.root_dir%/../web/_site/_uploads/croped"
                 create: true
     filesystems:
         image:
@@ -30,10 +30,10 @@ jb_file_uploader:
     resolvers:
         upload:
             assets:
-                directory: uploads
+                directory: _site/_uploads
         croped:
             assets:
-                directory: uploads/croped
+                directory: _site/_uploads/croped
     croped_fs: croped
     croped_resolver: croped
     endpoints:
