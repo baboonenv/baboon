@@ -9,7 +9,12 @@ $(document).ready(function() {
                 autoSize: false,
                 width: '600px',
                 maxWidth: '600px',
-                height: 'auto'
+                height: 'auto',
+                helpers: {
+                    overlay: {
+                        closeClick: false
+                    }
+                }
             });
         },
         saveAssetValue: function ($this, $assetKey) {
