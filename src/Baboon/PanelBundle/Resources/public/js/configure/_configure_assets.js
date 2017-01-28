@@ -50,6 +50,13 @@ $(document).ready(function() {
                 return;
             }
             $('#asset-data-wrap').val($imageVal);
+        },
+        refreshFileValue: function () {
+            var $fileVal = $('#upload_file_file').val();
+            if($fileVal == ''){
+                return;
+            }
+            $('#asset-data-wrap').val($fileVal);
         }
     };
 });

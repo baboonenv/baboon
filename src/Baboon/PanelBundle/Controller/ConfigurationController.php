@@ -2,6 +2,7 @@
 
 namespace Baboon\PanelBundle\Controller;
 
+use Baboon\PanelBundle\Form\UploadFileType;
 use Baboon\PanelBundle\Form\UploadImageType;
 use Baboon\PanelBundle\Params\AssetTypes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -56,7 +57,17 @@ class ConfigurationController extends Controller
             ];
             $assetParams['form'] = $this
                 ->createForm(UploadImageType::class, null, [
-                    'image_options' => $imageOptions
+                    'image_options' => $imageOptions,
+                    ]
+                )
+                ->createView();
+        }elseif ($asset['type'] == AssetTypes::FILE){
+            $fileOptions = [
+                'endpoint' => 'gallery',
+            ];
+            $assetParams['form'] = $this
+                ->createForm(UploadFileType::class, null, [
+                        'file_options' => $fileOptions,
                     ]
                 )
                 ->createView();
@@ -80,6 +91,8 @@ class ConfigurationController extends Controller
 
         if($confData['assets'][$assetKey]['type'] == AssetTypes::IMAGE){
             $assetValue = '/_site/_uploads/croped/'.$assetValue;
+        }elseif($confData['assets'][$assetKey]['type'] == AssetTypes::FILE){
+            $assetValue = '/_site/_uploads/'.$assetValue;
         }
         $confData['assets'][$assetKey]['value'] = $assetValue;
         $confData['assets'][$assetKey]['isDefaultValue'] = false;
