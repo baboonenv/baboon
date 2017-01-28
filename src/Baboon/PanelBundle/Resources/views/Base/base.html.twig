@@ -21,7 +21,7 @@
         <link href="{{ asset('bundles/baboonpanel/js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/summernote/dist/summernote.css') }}" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.css" rel="stylesheet">
+        <link href="{{ asset('vendor/Jcrop/css/Jcrop.min.css') }}" rel="stylesheet">
     {% endblock %}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -104,7 +104,7 @@
     <!--footer start-->
     <footer class="site-footer">
         <div class="text-center">
-            2014 - Alvarez.is
+            2016 - Baboon Environment
             <a href="blank.html#" class="go-top">
                 <i class="fa fa-angle-up"></i>
             </a>
@@ -119,9 +119,8 @@
     <script src="{{ asset('/bundles/baboonpanel/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/bundles/baboonpanel/js/jquery-ui-1.9.2.custom.min.js') }}"></script>
     <script src="{{ asset('/bundles/baboonpanel/js/jquery.ui.touch-punch.min.js') }}"></script>
-    <script class="include" type="text/javascript" src="{{ asset('/bundles/baboonpanel/js/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ asset('/bundles/baboonpanel/js/jquery.dcjqaccordion.2.7.js') }}"></script>
     <script src="{{ asset('/bundles/baboonpanel/js/jquery.scrollTo.min.js') }}"></script>
-    <script src="{{ asset('/bundles/baboonpanel/js/jquery.nicescroll.js') }}"></script>
     <script src="{{ asset('bundles/baboonpanel/js/fancybox/jquery.fancybox.js') }}"></script>
     <script src="{{ asset('vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
     <script src="{{ asset('vendor/markdown/lib/markdown.js') }}"></script>
@@ -129,7 +128,7 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-validator/dist/validator.min.js') }}"></script>
     <script src="{{ asset('vendor/summernote/dist/summernote.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+    <script src="{{ asset('vendor/Jcrop/js/Jcrop.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <!--common script for all pages-->
     <script src="{{ asset('/bundles/baboonpanel/js/common-scripts.js') }}"></script>
