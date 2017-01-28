@@ -16,6 +16,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:behram/FileUploaderBundle.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.1.*",
@@ -32,7 +38,8 @@
         "symfony/assetic-bundle": "^2.8",
         "mustache/mustache": "^2.11",
         "knplabs/knp-markdown-bundle": "^1.5",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "jbouzekri/file-uploader-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

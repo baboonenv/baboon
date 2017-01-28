@@ -1,0 +1,64 @@
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        image:
+            local:
+                directory: "%kernel.root_dir%/../web/uploads"
+                create: true
+        croped:
+            local:
+                directory: "%kernel.root_dir%/../web/uploads/croped"
+                create: true
+    filesystems:
+        image:
+            adapter: image
+            alias: image_filesystem
+        croped:
+            adapter: croped
+            alias: croped_filesystem
+
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: blueimp
+            storage:
+                type: gaufrette
+                filesystem: gaufrette.image_filesystem
+                stream_wrapper: gaufrette://image/
+
+jb_file_uploader:
+    resolvers:
+        upload:
+            assets:
+                directory: uploads
+        croped:
+            assets:
+                directory: uploads/croped
+    croped_fs: croped
+    croped_resolver: croped
+    endpoints:
+        gallery:
+            upload_resolver: upload
+            upload_validators: {}
+            crop_validators: {}
+
+liip_imagine:
+    data_loader: stream.image_filesystem
+    loaders:
+        stream.image_filesystem:
+            stream:
+                wrapper: gaufrette://image/
+        stream.croped_filesystem:
+            stream:
+                wrapper: gaufrette://croped/
+    filter_sets:
+        original: ~
+        thumb_from_original:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+        thumb_from_croped:
+            data_loader: stream.croped_filesystem
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }

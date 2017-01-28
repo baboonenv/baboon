@@ -8,6 +8,16 @@ bb_panel:
     prefix:   "/dashboard"
     resource: "@BaboonPanelBundle/Resources/config/routing.yml"
 
+oneup_uploader:
+    resource: .
+    type: uploader
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+jb_fileupload_crop:
+    resource: "@JbFileUploaderBundle/Resources/config/routing.yml"
+
 app_main:
     path    : /
     defaults: { _controller: "BaboonAppBundle:Default:index" }

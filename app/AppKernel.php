@@ -19,6 +19,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Jb\Bundle\FileUploaderBundle\JbFileUploaderBundle(),
 
             new Baboon\AppBundle\BaboonAppBundle(),
             new Baboon\PanelBundle\BaboonPanelBundle(),

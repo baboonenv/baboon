@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: doctrine.yml }
+    - { resource: uploader.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -39,6 +40,8 @@ twig:
         panel_title: '%panel_title%'
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'JbFileUploaderBundle:Form:fields.html.twig'
 
 # Swiftmailer Configuration
 swiftmailer:
