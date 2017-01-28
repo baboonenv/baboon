@@ -22,6 +22,11 @@
         <link href="{{ asset('vendor/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/summernote/dist/summernote.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/Jcrop/css/Jcrop.min.css') }}" rel="stylesheet">
+
+        <!-- Uploader related css files -->
+        <link href="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/css/jquery.fileupload.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/jbfileuploader/css/jbfileupload.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/jbfileuploader/lib/jcrop/css/jquery.Jcrop.min.css') }}" type="text/css" rel="stylesheet" />
     {% endblock %}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -130,6 +135,20 @@
     <script src="{{ asset('vendor/summernote/dist/summernote.js') }}"></script>
     <script src="{{ asset('vendor/Jcrop/js/Jcrop.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    <!-- Uploader related js files -->
+    <script type="text/javascript" src="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/js/jquery.iframe-transport.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/jbfileuploader/lib/jquery-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/jbfileuploader/js/jbfileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/jbfileuploader/lib/jcrop/js/jquery.Jcrop.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.jb_fileupload').jbFileUpload();
+        });
+    </script>
+
     <!--common script for all pages-->
     <script src="{{ asset('/bundles/baboonpanel/js/common-scripts.js') }}"></script>
 {% endblock %}
