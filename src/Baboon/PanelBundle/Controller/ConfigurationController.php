@@ -2,6 +2,8 @@
 
 namespace Baboon\PanelBundle\Controller;
 
+use Baboon\PanelBundle\Form\UploadImageType;
+use Baboon\PanelBundle\Params\AssetTypes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,10 +34,35 @@ class ConfigurationController extends Controller
         $assetKey = $request->get('assetKey');
         $asset = $confService->collectConfigurationData()['assets'][$assetKey];
 
+        $assetParams = $this->collectAssetParams($asset);
         return $this->render('@BaboonPanel/Configuration/_configure_asset/_'.$asset['type'].'.html.twig', [
-            'asset'     => $asset,
-            'assetKey'  => $assetKey,
+            'asset'         => $asset,
+            'assetKey'      => $assetKey,
+            'assetParams'   => $assetParams,
         ]);
+    }
+
+    private function collectAssetParams($asset)
+    {
+        $assetParams = [];
+        if($asset['type'] == AssetTypes::IMAGE){
+            $imageOptions = [
+                'endpoint' => 'gallery',
+                'img_width' => $asset['width'],
+                'img_height' => $asset['height'],
+                'crop_options' => [
+                    'aspect-ratio' => $asset['width'] / $asset['height'],
+                ]
+            ];
+            $assetParams['form'] = $this
+                ->createForm(UploadImageType::class, null, [
+                    'image_options' => $imageOptions
+                    ]
+                )
+                ->createView();
+        }
+
+        return $assetParams;
     }
 
     /**
@@ -50,6 +77,10 @@ class ConfigurationController extends Controller
         $assetValue = $request->get('value');
 
         $confData = $confService->collectConfigurationData();
+
+        if($confData['assets'][$assetKey]['type'] = AssetTypes::IMAGE){
+            $assetValue = '/_site/_uploads/croped/'.$assetValue;
+        }
         $confData['assets'][$assetKey]['value'] = $assetValue;
         $confData['assets'][$assetKey]['isDefaultValue'] = false;
 

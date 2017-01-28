@@ -43,6 +43,13 @@ $(document).ready(function() {
             $.get(loadAssetPath, function(data){
                 wrapDiv.html(data);
             });
+        },
+        refreshImageValue: function () {
+            var $imageVal = $('#upload_image_image').val();
+            if($imageVal == ''){
+                return;
+            }
+            $('#asset-data-wrap').val($imageVal);
         }
     };
 });

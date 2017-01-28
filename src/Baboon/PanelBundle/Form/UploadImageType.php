@@ -17,9 +17,7 @@ class UploadImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image', CropImageAjaxType::class, [
-                'endpoint' => 'gallery',
-            ])
+            ->add('image', CropImageAjaxType::class, $options['image_options'])
         ;
     }
 
@@ -31,6 +29,7 @@ class UploadImageType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => UploadImage::class,
+                'image_options' => [],
                 'attr' => [
                     'class' => 'form-validate',
                 ],
