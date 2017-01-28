@@ -31,20 +31,10 @@ class ThemeServerType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => ThemeServer::class,
-                'checkListsChoices' => [],
-                'submissionFilesChoices' => [],
                 'attr' => [
                     'class' => 'form-validate',
                 ],
             )
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ojs_article_submission';
     }
 }
