@@ -12,11 +12,6 @@ use Symfony\Component\Yaml\Yaml;
 class EnableThemeService
 {
     /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    /**
      * @var ToolsService
      */
     private $tools;

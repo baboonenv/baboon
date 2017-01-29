@@ -2,9 +2,6 @@
 
 namespace Baboon\PanelBundle\Service;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Yaml\Yaml;
-
 /**
  * Class DeployThemeService
  * @package Baboon\PanelBundle\Service
@@ -12,52 +9,89 @@ use Symfony\Component\Yaml\Yaml;
 class DeployThemeService
 {
     /**
-     * @var KernelInterface
+     * @var ThemeConfigurationService
      */
-    private $kernel;
+    private $configurationService;
 
     /**
-     * @var string
+     * @var ToolsService
      */
-    private $themeZipUri;
+    private $tools;
 
     /**
-     * @var string
+     * @var \Mustache_Engine
      */
-    private $rootDir;
+    private $mustache;
 
     /**
-     * @var string
+     * @var []
      */
-    private $themesDir;
+    private $configurationData;
 
     /**
-     * @var string
+     * @var []
      */
-    private $themeRealDir;
+    private $renderFiles = [];
 
     /**
-     * @var string
+     * @var []
      */
-    private $themeDir;
+    private $renderData = [];
 
     /**
-     * @var string
-     */
-    private $siteDir;
-
-    /**
-     * @var string
-     */
-    private $cloneThemePath;
-
-    /**
-     * EnableThemeService constructor.
+     * DeployThemeService constructor.
      *
-     * @param KernelInterface $kernel
+     * @param ThemeConfigurationService $configurationService
+     * @param ToolsService $toolsService
+     * @param \Mustache_Engine $mustache
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(
+        ThemeConfigurationService $configurationService,
+        ToolsService $toolsService,
+        \Mustache_Engine $mustache
+    ) {
+        $this->configurationService = $configurationService;
+        $this->tools = $toolsService;
+        $this->mustache = $mustache;
+    }
+
+    public function syncSiteTheme()
     {
-        $this->kernel = $kernel;
+        $this->setupRenderConfiguration();
+        $this->renderFiles();
+    }
+
+    private function setupRenderConfiguration()
+    {
+        $this->configurationData = $this->configurationService->collectConfigurationData();
+
+        foreach ($this->configurationData["render_files"] as $file){
+
+            $this->renderFiles[] = $this->tools->getRenderDir().$file;
+        }
+        $this->tools->deleteDir($this->tools->getRenderDir());
+        $this->tools->createDir($this->tools->getRenderDir());
+        $this->tools->moveFilesToDir($this->tools->getSourceDir(), $this->tools->getRenderDir(), false);
+        $this->normalizeRenderData();
+    }
+
+    public function normalizeRenderData()
+    {
+        $renderData = [];
+        $renderData['container'] = $this->configurationData;
+        foreach ($this->configurationData['assets'] as $assetKey => $asset){
+            $renderData[$assetKey] = $asset['value'];
+        }
+
+        $this->renderData = $renderData;
+    }
+
+    private function renderFiles()
+    {
+        foreach ($this->renderFiles as $file){
+            $fileContent = $this->tools->getContent($file);
+            $renderedContent = $this->mustache->render($fileContent, $this->renderData);
+            file_put_contents($file, $renderedContent);
+        }
     }
 }

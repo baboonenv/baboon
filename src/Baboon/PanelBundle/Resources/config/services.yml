@@ -1,4 +1,7 @@
 services:
+  mustache:
+    class: Mustache_Engine
+
   baboon.tools_service:
     class: Baboon\PanelBundle\Service\ToolsService
     arguments:
@@ -19,3 +22,4 @@ services:
     arguments:
       - "@baboon.panel.theme_configuration_service"
       - "@baboon.tools_service"
+      - "@mustache"

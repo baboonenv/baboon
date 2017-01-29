@@ -1,0 +1,5 @@
+bb_panel_sync_theme:
+    path:     /deploy/sync/theme
+    defaults: { _controller: BaboonPanelBundle:Deploy:sync }
+    options:
+        expose: true

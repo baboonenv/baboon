@@ -33,7 +33,14 @@ $(document).ready(function() {
             });
         },
         syncTheme: function ($this) {
-            alert('sync theme');
+            var themeDeploySyncPath = Routing.generate('bb_panel_sync_theme');
+            $.get(themeDeploySyncPath, function(data){
+                noty({
+                    type: 'success',
+                    text: 'Theme Site successfully synchronize! -> '+data,
+                    timeout: 2000
+                });
+            });
         },
         deployToGit: function ($this) {
             alert('deploy to git');
