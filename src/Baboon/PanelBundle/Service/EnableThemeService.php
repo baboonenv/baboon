@@ -19,22 +19,12 @@ class EnableThemeService
     /**
      * @var ToolsService
      */
-    private $toolsService;
+    private $tools;
 
     /**
      * @var string
      */
     private $themeZipUri;
-
-    /**
-     * @var string
-     */
-    private $rootDir;
-
-    /**
-     * @var string
-     */
-    private $themesDir;
 
     /**
      * @var string
@@ -49,23 +39,16 @@ class EnableThemeService
     /**
      * @var string
      */
-    private $siteDir;
-
-    /**
-     * @var string
-     */
     private $cloneThemePath;
 
     /**
      * EnableThemeService constructor.
      *
-     * @param KernelInterface $kernel
      * @param ToolsService $toolsService
      */
-    public function __construct(KernelInterface $kernel, ToolsService $toolsService)
+    public function __construct(ToolsService $toolsService)
     {
-        $this->kernel = $kernel;
-        $this->toolsService = $toolsService;
+        $this->tools = $toolsService;
     }
 
     /**
@@ -75,8 +58,8 @@ class EnableThemeService
     public function downloadAndEnableTheme(string $zipUri) : bool
     {
         $this->setupVars($zipUri);
-        $zipFileContent = $this->toolsService->getContent($this->themeZipUri);
-        $this->toolsService->createDir($this->themeDir);
+        $zipFileContent = $this->tools->getContent($this->themeZipUri);
+        $this->tools->createDir($this->themeDir);
         $this->setupSiteDirs();
 
         file_put_contents($this->cloneThemePath, $zipFileContent);
@@ -88,8 +71,8 @@ class EnableThemeService
             unlink($this->cloneThemePath);
         }
         $this->normalizeThemeDir();
-        $this->toolsService->moveFilesToDir($this->themeDir, $this->siteDir.'_source/', false);
-        $this->toolsService->moveFilesToDir($this->themeDir, $this->siteDir.'_render/', false);
+        $this->tools->moveFilesToDir($this->themeDir, $this->tools->getSourceDir(), false);
+        $this->tools->moveFilesToDir($this->themeDir, $this->tools->getRenderDir(), false);
         $this->generateDataFile();
 
         return true;
@@ -101,20 +84,17 @@ class EnableThemeService
     private function setupVars(string $zipUri)
     {
         $this->themeZipUri = $zipUri;
-        $this->rootDir = $this->kernel->getRootDir();
-        $this->themesDir = $this->rootDir.'/../web/_themes/';
-        $this->themeDir = $this->themesDir.rand(0, 999).'/';
+        $this->themeDir = $this->tools->getThemesDir().rand(0, 999).'/';
         $this->themeRealDir = $this->themeDir;
-        $this->siteDir = $this->rootDir.'/../web/_site/';
         $this->cloneThemePath = $this->themeDir.'theme_clone.zip';
     }
 
     private function setupSiteDirs()
     {
-        $this->toolsService->deleteDir($this->siteDir);
-        $this->toolsService->createDir($this->siteDir);
-        $this->toolsService->createDir($this->siteDir.'_source/');
-        $this->toolsService->createDir($this->siteDir.'_render/');
+        $this->tools->deleteDir($this->tools->getSiteDir());
+        $this->tools->createDir($this->tools->getSiteDir());
+        $this->tools->createDir($this->tools->getSourceDir());
+        $this->tools->createDir($this->tools->getRenderDir());
     }
 
     /**
@@ -122,7 +102,7 @@ class EnableThemeService
      */
     private function generateDataFile()
     {
-        $baboonData = Yaml::parse(file_get_contents($this->siteDir.'_source/.baboon.yml'));
+        $baboonData = Yaml::parse(file_get_contents($this->tools->getSourceDir().'.baboon.yml'));
         foreach ($baboonData['assets'] as $assetKey => $asset){
             $asset['value'] = $asset['default'];
             $asset['isDefaultValue'] = true;
@@ -130,7 +110,7 @@ class EnableThemeService
             $baboonData['assets'][$assetKey] = $asset;
         }
 
-        file_put_contents($this->siteDir.'data.json', json_encode($baboonData));
+        file_put_contents($this->tools->getSiteDir().'data.json', json_encode($baboonData));
 
         return true;
     }
@@ -140,15 +120,15 @@ class EnableThemeService
      */
     private function normalizeThemeDir()
     {
-        if($this->toolsService->haveBaboonConfiguration($this->themeDir)){
+        if($this->tools->haveBaboonConfiguration($this->themeDir)){
             return true;
         }
         $scanThemeDir = scandir($this->themeDir);
         foreach ($scanThemeDir as $item){
             if(is_dir($this->themeDir.$item) && $item != '.' && $item != '..'){
                 $this->themeDir .=  $item;
-                if($this->toolsService->haveBaboonConfiguration($this->themeDir)){
-                    $this->toolsService->moveFilesToDir($this->themeDir, $this->themeRealDir);
+                if($this->tools->haveBaboonConfiguration($this->themeDir)){
+                    $this->tools->moveFilesToDir($this->themeDir, $this->themeRealDir);
                     $this->themeDir = $this->themeRealDir;
 
                     return true;

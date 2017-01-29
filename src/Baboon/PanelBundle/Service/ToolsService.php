@@ -138,4 +138,29 @@ class ToolsService
 
         return true;
     }
+
+    public function getRootDir()
+    {
+        return $this->kernel->getRootDir();
+    }
+
+    public function getSiteDir()
+    {
+        return $this->getRootDir().'/../web/_site/';
+    }
+
+    public function getRenderDir()
+    {
+        return $this->getSiteDir().'_render/';
+    }
+
+    public function getSourceDir()
+    {
+        return $this->getSiteDir().'_source/';
+    }
+
+    public function getThemesDir()
+    {
+        return $this->getRootDir().'/../web/_themes/';
+    }
 }

@@ -2,8 +2,6 @@
 
 namespace Baboon\PanelBundle\Service;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-
 /**
  * Class ThemeConfigurationService
  * @package Baboon\PanelBundle\Service
@@ -11,18 +9,18 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class ThemeConfigurationService
 {
     /**
-     * @var KernelInterface
+     * @var ToolsService
      */
-    private $kernel;
+    private $tools;
 
     /**
-     * EnableThemeService constructor.
+     * ThemeConfigurationService constructor.
      *
-     * @param KernelInterface $kernel
+     * @param ToolsService $toolsService
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(ToolsService $toolsService)
     {
-        $this->kernel = $kernel;
+        $this->tools = $toolsService;
     }
 
     public function collectConfigurationData()
@@ -41,6 +39,6 @@ class ThemeConfigurationService
 
     public function getDataFile()
     {
-        return $this->kernel->getRootDir().'/../web/_site/data.json';
+        return $this->tools->getSiteDir().'data.json';
     }
 }
