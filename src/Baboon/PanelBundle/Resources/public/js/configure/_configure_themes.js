@@ -31,6 +31,15 @@ $(document).ready(function() {
             $.post($actionUrl, {zip: $zipUrl} ,function(data){
                 alert(data);
             });
+        },
+        syncTheme: function ($this) {
+            alert('sync theme');
+        },
+        deployToGit: function ($this) {
+            alert('deploy to git');
+        },
+        deployToFTP: function ($this) {
+            alert('deploy to ftp');
         }
     };
 });

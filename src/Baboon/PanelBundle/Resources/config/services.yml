@@ -8,3 +8,8 @@ services:
     class: Baboon\PanelBundle\Service\ThemeConfigurationService
     arguments:
       - "@kernel"
+
+  baboon.panel.theme_deploy:
+    class: Baboon\PanelBundle\Service\DeployThemeService
+    arguments:
+      - "@kernel"
