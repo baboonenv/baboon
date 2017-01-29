@@ -1,8 +1,14 @@
 services:
+  baboon.tools_service:
+    class: Baboon\PanelBundle\Service\ToolsService
+    arguments:
+      - "@kernel"
+
   baboon.panel.enable_theme_service:
     class: Baboon\PanelBundle\Service\EnableThemeService
     arguments:
       - "@kernel"
+      - "@baboon.tools_service"
 
   baboon.panel.theme_configuration_service:
     class: Baboon\PanelBundle\Service\ThemeConfigurationService
@@ -12,4 +18,5 @@ services:
   baboon.panel.theme_deploy:
     class: Baboon\PanelBundle\Service\DeployThemeService
     arguments:
-      - "@kernel"
+      - "@baboon.panel.theme_configuration_service"
+      - "@baboon.panel.enable_theme_service"
