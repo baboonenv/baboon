@@ -49,9 +49,9 @@ class FTPConfiguration
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getHostname(): string
+    public function getHostname()
     {
         return $this->hostname;
     }
@@ -69,9 +69,9 @@ class FTPConfiguration
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -109,9 +109,9 @@ class FTPConfiguration
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPath(): string
+    public function getPath()
     {
         return $this->path;
     }
