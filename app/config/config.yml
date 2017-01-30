@@ -55,3 +55,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: Baboon\PanelBundle\Entity\User
+
+mopa_bootstrap:
+    form: ~  # Adds twig form theme  support

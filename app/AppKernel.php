@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Jb\Bundle\FileUploaderBundle\JbFileUploaderBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
 
             new Baboon\AppBundle\BaboonAppBundle(),
             new Baboon\PanelBundle\BaboonPanelBundle(),
