@@ -1,0 +1,19 @@
+Baboon\PanelBundle\Entity\FTPConfiguration:
+    type: entity
+    table: bb_theme_deploy_ftp_configuration
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        hostname:
+            type: string
+            nullable: true
+        username:
+            type: string
+            nullable: false
+        path:
+            type: string
+            nullable: false
