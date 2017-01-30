@@ -1,0 +1,11 @@
+<div class="well">
+    {{ include('::flashbag.html.twig') }}
+    {{ form(form) }}
+    <button class="btn btn-warning btn-xs pull-left" onclick="ConfigureTheme.testFTPConnection(this)">
+        {{ 'test.connection'|trans }}
+    </button>
+    <button class="btn btn-success pull-right" onclick="ConfigureTheme.updateConfigureFTP(this)">
+        {{ 'update.setting'|trans }}
+    </button>
+    <br><br>
+</div>

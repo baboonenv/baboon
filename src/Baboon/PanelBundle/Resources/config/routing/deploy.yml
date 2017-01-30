@@ -3,3 +3,27 @@ bb_panel_sync_theme:
     defaults: { _controller: BaboonPanelBundle:Deploy:sync }
     options:
         expose: true
+
+bb_panel_deploy_ftp_is_configured:
+    path:     /deploy/ftp/is/configured
+    defaults: { _controller: BaboonPanelBundle:Deploy:FTPisConfigured }
+    options:
+        expose: true
+
+bb_panel_deploy_configure_ftp:
+    path:     /deploy/configure/ftp
+    defaults: { _controller: BaboonPanelBundle:Deploy:configureFTP }
+    options:
+        expose: true
+
+bb_panel_deploy_ftp_connection_test:
+    path:     /deploy/ftp/connection/test
+    defaults: { _controller: BaboonPanelBundle:Deploy:FTPConnectionTest }
+    options:
+        expose: true
+
+bb_panel_deploy_ftp:
+    path:     /deploy/ftp
+    defaults: { _controller: BaboonPanelBundle:Deploy:deployToFTP }
+    options:
+        expose: true
