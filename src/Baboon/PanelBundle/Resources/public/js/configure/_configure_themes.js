@@ -45,14 +45,25 @@ $(document).ready(function() {
         deployToGit: function ($this) {
             alert('deploy to git');
         },
-        deployToFTP: function ($this) {
+        deployToFTP: function () {
             var themeDeployFTPIsConfigured = Routing.generate('bb_panel_deploy_ftp_is_configured');
             $.get(themeDeployFTPIsConfigured, function(data){
                 if(data.isConfigured == false){
                     ConfigureTheme.configureFTP();
-                }else{
-
+                    return;
                 }
+                var deployToFTPPath = Routing.generate('bb_panel_deploy_ftp');
+                $.fancybox({
+                    type: 'ajax',
+                    href: deployToFTPPath
+                });
+            });
+        },
+        postDeployToFTP: function () {
+            var postDeployFTP = Routing.generate('bb_panel_post_deploy_ftp');
+            var passwordForm = $('form[name="ftp_configuration"]');
+            $.post(postDeployFTP, passwordForm.serialize(),function(data){
+                alert('data');
             });
         },
         configureFTP: function () {

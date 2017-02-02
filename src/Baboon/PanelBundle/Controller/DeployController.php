@@ -5,6 +5,7 @@ namespace Baboon\PanelBundle\Controller;
 use Baboon\PanelBundle\Entity\FTPConfiguration;
 use Baboon\PanelBundle\Form\FTPConfigurationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -134,8 +135,37 @@ class DeployController extends Controller
         ]);
     }
 
-    public function deployToFTPAction()
+    public function deployToFTPAction(Request $request)
     {
-        return new Response('deployed to ftp');
+        $em = $this->getDoctrine()->getManager();
+
+        $FTPConfiguration = $em->getRepository(FTPConfiguration::class)->findOneBy([]);
+        $form = $this->getFTPPasswordForm($FTPConfiguration);
+        $form->handleRequest($request);
+
+        return $this->render('@BaboonPanel/Deploy/_ftp_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function postDeployToFTPAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $FTPConfiguration = $em->getRepository(FTPConfiguration::class)->findOneBy([]);
+        $form = $this->getFTPPasswordForm($FTPConfiguration);
+        $form->handleRequest($request);
+
+        var_dump($FTPConfiguration->getPassword());exit();
+    }
+
+    private function getFTPPasswordForm(FTPConfiguration $FTPConfiguration)
+    {
+        $form = $this->createForm(FTPConfigurationType::class, $FTPConfiguration);
+        $form->remove('username');
+        $form->remove('hostname');
+        $form->remove('path');
+
+        return $form;
     }
 }

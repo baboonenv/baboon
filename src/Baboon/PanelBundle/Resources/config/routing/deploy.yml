@@ -27,3 +27,9 @@ bb_panel_deploy_ftp:
     defaults: { _controller: BaboonPanelBundle:Deploy:deployToFTP }
     options:
         expose: true
+
+bb_panel_post_deploy_ftp:
+    path:     /deploy/ftp/post
+    defaults: { _controller: BaboonPanelBundle:Deploy:postDeployToFTP }
+    options:
+        expose: true
