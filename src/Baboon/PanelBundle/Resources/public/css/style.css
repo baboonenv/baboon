@@ -2240,4 +2240,7 @@ label {
     min-height: 900px;
 }
 
+a{
+    cursor: pointer;
+}
 

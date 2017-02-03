@@ -8,8 +8,16 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-            <li><a onclick="ConfigureTheme.deployToGit();" href="#">{{ 'deploy.to.git'|trans }}</a></li>
-            <li><a onclick="ConfigureTheme.deployToFTP();" href="#">{{ 'deploy.to.ftp'|trans }}</a></li>
+            <li>
+                <a onclick="ConfigureTheme.deployToGit();">
+                    {{ 'deploy.to.git'|trans }}
+                </a>
+            </li>
+            <li>
+                <a onclick="ConfigureTheme.deployToFTP();">
+                    {{ 'deploy.to.ftp'|trans }}
+                </a>
+            </li>
         </ul>
     </div>
 {% endblock %}
