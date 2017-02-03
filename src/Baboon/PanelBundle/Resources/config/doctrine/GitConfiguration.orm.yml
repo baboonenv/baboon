@@ -1,0 +1,20 @@
+Baboon\PanelBundle\Entity\GitConfiguration:
+    type: entity
+    table: bb_theme_deploy_git_configuration
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        deployType: # https or ssh
+            type: string
+        repo:
+            type: string
+        branch:
+            type: string
+            nullable: true
+        email:
+            type: string
+            nullable: true
