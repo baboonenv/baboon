@@ -1,0 +1,29 @@
+bb_panel_deploy_ftp_is_configured:
+    path:     /deploy/ftp/is/configured
+    defaults: { _controller: BaboonPanelBundle:FTPDeploy:FTPisConfigured }
+    options:
+        expose: true
+
+bb_panel_deploy_configure_ftp:
+    path:     /deploy/configure/ftp
+    defaults: { _controller: BaboonPanelBundle:FTPDeploy:configureFTP }
+    options:
+        expose: true
+
+bb_panel_deploy_ftp_connection_test:
+    path:     /deploy/ftp/connection/test
+    defaults: { _controller: BaboonPanelBundle:FTPDeploy:FTPConnectionTest }
+    options:
+        expose: true
+
+bb_panel_deploy_ftp:
+    path:     /deploy/ftp
+    defaults: { _controller: BaboonPanelBundle:FTPDeploy:deployToFTP }
+    options:
+        expose: true
+
+bb_panel_post_deploy_ftp:
+    path:     /deploy/ftp/post
+    defaults: { _controller: BaboonPanelBundle:FTPDeploy:postDeployToFTP }
+    options:
+        expose: true
