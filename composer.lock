@@ -4,9 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1fb6d6cba54d225e932c31ff95f02721",
-    "content-hash": "17490e2be15591e0ebd8ce623e935076",
+    "hash": "e55f7712fd7d7637ac6bd60f6bce862f",
+    "content-hash": "28ddff0ed3ab24945101446c09a9ab5c",
     "packages": [
+        {
+            "name": "coyl/git",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:behram/git.git",
+                "reference": "f1b579c9226a7761328b89e83212519b18d1759d"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Vasil coylOne Kulakov",
+                    "email": "iam@vasiliy.pro",
+                    "homepage": "http://github.com/coyl"
+                }
+            ],
+            "description": "PHP library for manipulations on git repository. Based on kbjr/Git.php and it's forks",
+            "homepage": "https://github.com/coyl/Git.php",
+            "keywords": [
+                "git",
+                "git-client",
+                "php-git"
+            ],
+            "time": "2016-06-08 12:24:48"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -839,12 +875,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "6b8828bcc64d0861b3918e1551947112d58e4d0c"
+                "reference": "a314d4aef3c3a34742bb6ae99065f27e6e49e000"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6b8828bcc64d0861b3918e1551947112d58e4d0c",
-                "reference": "6b8828bcc64d0861b3918e1551947112d58e4d0c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/a314d4aef3c3a34742bb6ae99065f27e6e49e000",
+                "reference": "a314d4aef3c3a34742bb6ae99065f27e6e49e000",
                 "shasum": ""
             },
             "require": {
@@ -854,7 +890,8 @@
                 "symfony/framework-bundle": "^2.7 || ^3.0",
                 "symfony/security-bundle": "^2.7 || ^3.0",
                 "symfony/templating": "^2.7 || ^3.0",
-                "symfony/twig-bundle": "^2.7 || ^3.0"
+                "symfony/twig-bundle": "^2.7 || ^3.0",
+                "twig/twig": "^1.28 || ^2.0"
             },
             "conflict": {
                 "doctrine/doctrine-bundle": "<1.3",
@@ -907,7 +944,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-01-27 14:24:54"
+            "time": "2017-02-02 14:13:19"
         },
         {
             "name": "imagine/imagine",
@@ -1024,7 +1061,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:behram/FileUploaderBundle.git",
-                "reference": "022130e57cd1f6265f09c8d0641f85d0c445c322"
+                "reference": "02d50979d28f5a2e7ff221ecb6215eb7e3ced75a"
             },
             "require": {
                 "knplabs/knp-gaufrette-bundle": "~0.3.0",
@@ -1058,7 +1095,7 @@
                 "upload",
                 "upload"
             ],
-            "time": "2017-01-23 02:12:47"
+            "time": "2017-01-28 09:45:19"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2035,16 +2072,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.19",
+            "version": "v3.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "d57c2f297d17ee82baf8cae0b16dae34a9378784"
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/d57c2f297d17ee82baf8cae0b16dae34a9378784",
-                "reference": "d57c2f297d17ee82baf8cae0b16dae34a9378784",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/ed86f6fb1753e76b39ff8b87f527045ca6b97169",
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169",
                 "shasum": ""
             },
             "require": {
@@ -2099,7 +2136,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-01-10 19:42:56"
+            "time": "2017-02-02 15:31:23"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -3136,7 +3173,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "jbouzekri/file-uploader-bundle": 20
+        "jbouzekri/file-uploader-bundle": 20,
+        "coyl/git": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

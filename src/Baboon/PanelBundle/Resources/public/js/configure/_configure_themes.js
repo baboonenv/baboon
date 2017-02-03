@@ -42,9 +42,9 @@ $(document).ready(function() {
                 });
             });
         },
-        deployToGit: function ($this) {
-            alert('deploy to git');
-        },
+        /**
+         * Deploy To FTP system related functions
+         */
         deployToFTP: function () {
             var themeDeployFTPIsConfigured = Routing.generate('bb_panel_deploy_ftp_is_configured');
             $.get(themeDeployFTPIsConfigured, function(data){
@@ -91,6 +91,64 @@ $(document).ready(function() {
             $.post( FTPConnectionTestPath, FTPConfigurationForm.serialize(), function( data ) {
                 $.fancybox(data);
             });
+        },
+        /**
+         * Deploy To Git system related functions
+         */
+        deployToGit: function () {
+            var themeDeployGitIsConfigured = Routing.generate('bb_panel_deploy_git_is_configured');
+            $.get(themeDeployGitIsConfigured, function(data){
+                if(data.isConfigured == false){
+                    ConfigureTheme.configureGit();
+                    return;
+                }
+                ConfigureTheme.postDeployToGit();
+            });
+        },
+        postDeployToGit: function () {
+            var postDeployGit = Routing.generate('bb_panel_post_deploy_git');
+            $.post(postDeployGit, function(data){
+                if(data.success == true){
+                    noty({
+                        type: 'success',
+                        text: 'Theme Site successfully deployed to Git!',
+                        timeout: 3000
+                    });
+                }
+            });
+        },
+        configureGit: function () {
+            var GitConfigurationPath = Routing.generate('bb_panel_deploy_configure_git');
+            $.fancybox({
+                width: '600px',
+                type: 'ajax',
+                href: GitConfigurationPath
+            });
+        },
+        updateConfigureGit: function () {
+            var GitConfigurationForm = $('form[name="git_configuration"]');
+            $.post( GitConfigurationForm.attr('action'), GitConfigurationForm.serialize(), function( data ) {
+                $.fancybox(data);
+            });
+        },
+        testGitConnection: function () {
+            var GitConfigurationForm = $('form[name="git_configuration"]');
+            var GitConnectionTestPath = Routing.generate('bb_panel_deploy_git_connection_test');
+            $.post( GitConnectionTestPath, GitConfigurationForm.serialize(), function( data ) {
+                $.fancybox(data);
+            });
+        },
+        normalizeConfigureGitForm: function () {
+            var deployType = $('#git_configuration_deployType').val();
+            var emailWrap = $('#git_configuration_email').parent().parent();
+            var passwordWrap = $('#git_configuration_password').parent().parent();
+            if(deployType == 'ssh'){
+                emailWrap.addClass('hidden');
+                passwordWrap.addClass('hidden');
+            }else if(deployType == 'https'){
+                emailWrap.removeClass('hidden');
+                passwordWrap.removeClass('hidden');
+            }
         }
     };
 });

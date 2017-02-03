@@ -1,0 +1,29 @@
+bb_panel_deploy_git_is_configured:
+    path:     /deploy/git/is/configured
+    defaults: { _controller: BaboonPanelBundle:GitDeploy:GitisConfigured }
+    options:
+        expose: true
+
+bb_panel_deploy_configure_git:
+    path:     /deploy/configure/git
+    defaults: { _controller: BaboonPanelBundle:GitDeploy:configureGit }
+    options:
+        expose: true
+
+bb_panel_deploy_git_connection_test:
+    path:     /deploy/git/connection/test
+    defaults: { _controller: BaboonPanelBundle:GitDeploy:GitConnectionTest }
+    options:
+        expose: true
+
+bb_panel_deploy_git:
+    path:     /deploy/git
+    defaults: { _controller: BaboonPanelBundle:GitDeploy:deployToGit }
+    options:
+        expose: true
+
+bb_panel_post_deploy_git:
+    path:     /deploy/git/post
+    defaults: { _controller: BaboonPanelBundle:GitDeploy:postDeployToGit }
+    options:
+        expose: true

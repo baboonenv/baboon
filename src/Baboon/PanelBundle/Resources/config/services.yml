@@ -30,3 +30,10 @@ services:
       - "@baboon.tools_service"
       - "@baboon.panel.theme_deploy"
       - "@doctrine.orm.entity_manager"
+
+  baboon.panel.git_deploy:
+    class: Baboon\PanelBundle\Service\GitDeployService
+    arguments:
+      - "@baboon.tools_service"
+      - "@baboon.panel.theme_deploy"
+      - "@doctrine.orm.entity_manager"

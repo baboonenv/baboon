@@ -1,0 +1,17 @@
+<div class="well">
+    {{ include('::flashbag.html.twig') }}
+    {{ form(form) }}
+    <button class="btn btn-warning btn-xs pull-left" onclick="ConfigureTheme.testGitConnection(this)">
+        {{ 'test.connection'|trans }}
+    </button>
+    <button class="btn btn-success pull-right" onclick="ConfigureTheme.updateConfigureGit(this)">
+        {{ 'update.setting'|trans }}
+    </button>
+    <br><br>
+</div>
+<script>
+    ConfigureTheme.normalizeConfigureGitForm();
+    $('#git_configuration_deployType').on('change', function () {
+        ConfigureTheme.normalizeConfigureGitForm();
+    });
+</script>

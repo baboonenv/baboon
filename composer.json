@@ -20,6 +20,10 @@
         {
             "type": "git",
             "url": "git@github.com:behram/FileUploaderBundle.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:behram/git.git"
         }
     ],
     "require": {
@@ -41,7 +45,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "jbouzekri/file-uploader-bundle": "dev-master",
         "mopa/bootstrap-bundle": "^3.1",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "coyl/git": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

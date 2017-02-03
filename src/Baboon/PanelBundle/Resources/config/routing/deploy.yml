@@ -6,3 +6,6 @@ bb_panel_sync_theme:
 
 ftp_deploy:
     resource: 'deploy/ftp.yml'
+
+git_deploy:
+    resource: 'deploy/git.yml'
