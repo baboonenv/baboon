@@ -63,7 +63,13 @@ $(document).ready(function() {
             var postDeployFTP = Routing.generate('bb_panel_post_deploy_ftp');
             var passwordForm = $('form[name="ftp_configuration"]');
             $.post(postDeployFTP, passwordForm.serialize(),function(data){
-                alert('data');
+                if(data.success == true){
+                    noty({
+                        type: 'success',
+                        text: 'Theme Site successfully deployed to FTP! -> ',
+                        timeout: 2000
+                    });
+                }
             });
         },
         configureFTP: function () {

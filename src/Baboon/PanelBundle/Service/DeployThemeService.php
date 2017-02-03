@@ -75,7 +75,7 @@ class DeployThemeService
         $this->normalizeRenderData();
     }
 
-    public function normalizeRenderData()
+    private function normalizeRenderData()
     {
         $renderData = [];
         $renderData['container'] = $this->configurationData;

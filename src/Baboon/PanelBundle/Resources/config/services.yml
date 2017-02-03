@@ -23,3 +23,10 @@ services:
       - "@baboon.panel.theme_configuration_service"
       - "@baboon.tools_service"
       - "@mustache"
+
+  baboon.panel.ftp_deploy:
+    class: Baboon\PanelBundle\Service\FTPDeployService
+    arguments:
+      - "@baboon.tools_service"
+      - "@baboon.panel.theme_deploy"
+      - "@doctrine.orm.entity_manager"

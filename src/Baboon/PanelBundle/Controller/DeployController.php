@@ -5,7 +5,6 @@ namespace Baboon\PanelBundle\Controller;
 use Baboon\PanelBundle\Entity\FTPConfiguration;
 use Baboon\PanelBundle\Form\FTPConfigurationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -150,13 +149,17 @@ class DeployController extends Controller
 
     public function postDeployToFTPAction(Request $request)
     {
+        $FTPDeployService = $this->get('baboon.panel.ftp_deploy');
         $em = $this->getDoctrine()->getManager();
 
         $FTPConfiguration = $em->getRepository(FTPConfiguration::class)->findOneBy([]);
         $form = $this->getFTPPasswordForm($FTPConfiguration);
         $form->handleRequest($request);
+        $FTPDeployService->deployToFTP();
 
-        var_dump($FTPConfiguration->getPassword());exit();
+        return new JsonResponse([
+            'success' => true,
+        ]);
     }
 
     private function getFTPPasswordForm(FTPConfiguration $FTPConfiguration)
