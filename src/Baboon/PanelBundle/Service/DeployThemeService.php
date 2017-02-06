@@ -2,6 +2,8 @@
 
 namespace Baboon\PanelBundle\Service;
 
+use Baboon\PanelBundle\Params\AssetTypes;
+
 /**
  * Class DeployThemeService
  * @package Baboon\PanelBundle\Service
@@ -80,6 +82,12 @@ class DeployThemeService
         $renderData = [];
         $renderData['container'] = $this->configurationData;
         foreach ($this->configurationData['assets'] as $assetKey => $asset){
+            if(in_array($asset['type'], [AssetTypes::FILE, AssetTypes::IMAGE])){
+                if(preg_match('/_uploads/', $asset['value'])){
+                    $renderUploadPath = $this->moveUploadToRenderDir($asset['value']);
+                    $asset['value'] = $renderUploadPath;
+                }
+            }
             $renderData[$assetKey] = $asset['value'];
         }
 
@@ -93,5 +101,17 @@ class DeployThemeService
             $renderedContent = $this->mustache->render($fileContent, $this->renderData);
             file_put_contents($file, $renderedContent);
         }
+    }
+
+    private function moveUploadToRenderDir($path)
+    {
+        $fullPath = $this->tools->getWebDir().$path;
+        $pathinfo = pathinfo($fullPath);
+        $renderUploadsDir = $this->tools->getRenderDir().'_uploads/';
+        $this->tools->createDir($renderUploadsDir);
+        $copyPath = $renderUploadsDir.$pathinfo['basename'];
+        copy($fullPath, $copyPath);
+
+        return '_uploads/'.$pathinfo['basename'];
     }
 }

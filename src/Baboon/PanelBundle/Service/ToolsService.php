@@ -174,9 +174,14 @@ class ToolsService
         return $this->kernel->getRootDir();
     }
 
+    public function getWebDir()
+    {
+        return $this->kernel->getRootDir().'/../web';
+    }
+
     public function getSiteDir()
     {
-        return $this->getRootDir().'/../web/_site/';
+        return $this->getWebDir().'/_site/';
     }
 
     public function getRenderDir()
