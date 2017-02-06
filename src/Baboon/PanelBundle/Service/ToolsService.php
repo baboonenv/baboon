@@ -52,6 +52,36 @@ class ToolsService
 
     /**
      * @param string $path
+     * @param array $excludeDirs
+     * @param bool $removeTopParent
+     *
+     * @return bool
+     */
+    public function cleanDir(string $path, array $excludeDirs = ['.git'], $removeTopParent = false) : bool
+    {
+        if (is_dir($path)) {
+            $objects = scandir($path);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($path."/".$object)){
+                        if(!in_array($object, $excludeDirs)){
+                            $this->cleanDir($path."/".$object, [], true);
+                        }
+                    }else{
+                        unlink($path."/".$object);
+                    }
+                }
+            }
+            if($removeTopParent){
+                rmdir($path);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $path
      * @return bool
      */
     public function createDir(string $path) : bool

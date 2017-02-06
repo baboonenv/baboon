@@ -65,9 +65,12 @@ class GitDeployService
     {
         $repo = $this->git->init($srcDir);
         $repo->add('.');
-        $repo->commit('Site updated '.date('d-m-Y H:m'));
 
-        $repo->run('remote add origin '.$destinationRepo);
+        try{
+            $repo->commit('Site updated '.date('Y-m-d H:i:s'));
+            $repo->run('remote add origin '.$destinationRepo);
+        }catch (\Exception $e){}
+
         $repo->push('origin', $this->GitConfiguration->getBranch(), true);
     }
 }

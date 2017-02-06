@@ -69,7 +69,7 @@ class DeployThemeService
 
             $this->renderFiles[] = $this->tools->getRenderDir().$file;
         }
-        $this->tools->deleteDir($this->tools->getRenderDir());
+        $this->tools->cleanDir($this->tools->getRenderDir());
         $this->tools->createDir($this->tools->getRenderDir());
         $this->tools->moveFilesToDir($this->tools->getSourceDir(), $this->tools->getRenderDir(), false);
         $this->normalizeRenderData();
