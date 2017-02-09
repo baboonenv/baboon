@@ -23,9 +23,5 @@
 {% endblock %}
 
 {% block content %}
-    {% for assetKey, asset in data.assets %}
-        <div class="well well-sm col-sm-12" id="asset-{{ assetKey }}-wrap-div">
-            {{ include('BaboonPanelBundle:Configuration/_widgets:_asset_wrap.html.twig') }}
-        </div>
-    {% endfor %}
+    {{ include('BaboonPanelBundle:Configuration/_widgets:_assets.html.twig') }}
 {% endblock %}

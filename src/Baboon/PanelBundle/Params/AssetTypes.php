@@ -14,4 +14,5 @@ class AssetTypes
     const CHOICES = 'choices';
     const EMAIL = 'email';
     const COLOR = 'color';
+    const TREE = 'tree';
 }

@@ -2,7 +2,7 @@
 
 namespace Baboon\PanelBundle\Service;
 
-use Symfony\Component\HttpKernel\KernelInterface;
+use Baboon\PanelBundle\Params\AssetTypes;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -98,16 +98,29 @@ class EnableThemeService
     private function generateDataFile()
     {
         $baboonData = Yaml::parse(file_get_contents($this->tools->getSourceDir().'.baboon.yml'));
-        foreach ($baboonData['assets'] as $assetKey => $asset){
-            $asset['value'] = $asset['default'];
-            $asset['isDefaultValue'] = true;
-
-            $baboonData['assets'][$assetKey] = $asset;
-        }
+        $baboonData['assets'] = $this->normalizeConfigurationAssets($baboonData['assets']);
 
         file_put_contents($this->tools->getSiteDir().'data.json', json_encode($baboonData));
 
         return true;
+    }
+
+    private function normalizeConfigurationAssets($assets)
+    {
+        foreach ($assets as $assetKey => $asset){
+
+            if($asset['type'] == AssetTypes::TREE){
+                $assets[$assetKey]['assets'] = $this->normalizeConfigurationAssets($asset['assets']);
+
+                continue;
+            }
+            $asset['value'] = $asset['default'];
+            $asset['isDefaultValue'] = true;
+
+            $assets[$assetKey] = $asset;
+        }
+
+        return $assets;
     }
 
     /**

@@ -1,17 +1,19 @@
 <div class="col-sm-12">
     <div class="col-sm-2">
-        <button class="btn btn-primary btn-xs" onclick="ConfigureAsset.configureField(this, '{{ assetKey }}')">
-            <i class="fa fa-cogs"></i>
-            {{ 'configure'|trans }}
-        </button>
+        {% if asset.type != 'tree' %}
+            <button class="btn btn-primary btn-xs" onclick="ConfigureAsset.configureField(this, '{{ assetKey }}')">
+                <i class="fa fa-cogs"></i>
+                {{ 'configure'|trans }}
+            </button>
+        {% endif %}
     </div>
-    <div class="col-sm-8 text-center">
+    <div class="col-sm-8">
         <legend class="col-sm-11">
             {{ asset.label }}
         </legend>
     </div>
     <div class="col-sm-2 text-center">
-        {% if asset.isDefaultValue %}
+        {% if asset.isDefaultValue is defined and asset.isDefaultValue %}
             <span class="label label-warning label-xs">
                 {{ 'using.default' }}
             </span>
