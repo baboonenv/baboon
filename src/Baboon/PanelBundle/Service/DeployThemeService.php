@@ -81,17 +81,28 @@ class DeployThemeService
     {
         $renderData = [];
         $renderData['container'] = $this->configurationData;
-        foreach ($this->configurationData['assets'] as $assetKey => $asset){
+        $renderData = array_merge($renderData, $this->normalizeAssetsData($this->configurationData['assets']));
+
+        $this->renderData = $renderData;
+    }
+
+    private function normalizeAssetsData($assets)
+    {
+        foreach ($assets as $assetKey => $asset){
             if(in_array($asset['type'], [AssetTypes::FILE, AssetTypes::IMAGE])){
                 if(preg_match('/_uploads/', $asset['value'])){
                     $renderUploadPath = $this->moveUploadToRenderDir($asset['value']);
                     $asset['value'] = $renderUploadPath;
                 }
             }
-            $renderData[$assetKey] = $asset['value'];
+            if($asset['type'] == AssetTypes::TREE){
+                $assets[$assetKey] = $this->normalizeAssetsData($asset['assets']);
+            }else{
+                $assets[$assetKey] = $asset['value'];
+            }
         }
 
-        $this->renderData = $renderData;
+        return $assets;
     }
 
     private function renderFiles()
