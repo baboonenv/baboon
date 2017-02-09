@@ -29,7 +29,11 @@ $(document).ready(function() {
                 return;
             }
             $.post($actionUrl, {zip: $zipUrl} ,function(data){
-                alert(data);
+                noty({
+                    type: 'success',
+                    text: 'Theme Site successfully downloaded and enabled! -> ',
+                    timeout: 2000
+                });
             });
         },
         syncTheme: function ($this) {

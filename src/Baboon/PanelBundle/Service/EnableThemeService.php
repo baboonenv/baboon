@@ -110,13 +110,14 @@ class EnableThemeService
         foreach ($assets as $assetKey => $asset){
 
             if($asset['type'] == AssetTypes::TREE){
-                $assets[$assetKey]['assets'] = $this->normalizeConfigurationAssets($asset['assets']);
 
-                continue;
+                $asset['multiple'] = true;
+                $asset['assets'] = $this->normalizeConfigurationAssets($asset['assets']);
+            }else{
+
+                $asset['value'] = $asset['default'];
+                $asset['isDefaultValue'] = true;
             }
-            $asset['value'] = $asset['default'];
-            $asset['isDefaultValue'] = true;
-
             $assets[$assetKey] = $asset;
         }
 
