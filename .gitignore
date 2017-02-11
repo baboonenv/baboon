@@ -41,9 +41,24 @@
 # Composer PHAR
 /composer.phar
 
+### Composer ###
+composer.phar
+composer.lock
+web/vendor/*
+
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 
 # baboon site related dirs
 /web/_site/
 /web/_themes/
+
+# Assets ,user uploads and sitemaps
+/web/assetic/
+/web/sitemap
+/web/media
+web/js
+web/css
+
+#sqlite dataabase
+app/data.db3
