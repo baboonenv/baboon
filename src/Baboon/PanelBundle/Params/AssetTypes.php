@@ -15,4 +15,21 @@ class AssetTypes
     const EMAIL = 'email';
     const COLOR = 'color';
     const TREE = 'tree';
+
+    static function getAssetTypes()
+    {
+        return [
+            self::TEXT,
+            self::STRING,
+            self::MARKDOWN,
+            self::RICHTEXT,
+            self::IMAGE,
+            self::FILE,
+            self::DATETIME,
+            self::CHOICES,
+            self::EMAIL,
+            self::COLOR,
+            self::TREE,
+        ];
+    }
 }
