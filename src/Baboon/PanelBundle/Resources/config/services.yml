@@ -37,3 +37,8 @@ services:
       - "@baboon.tools_service"
       - "@baboon.panel.theme_deploy"
       - "@doctrine.orm.entity_manager"
+
+  baboon.panel.validate_configuration:
+    class: Baboon\PanelBundle\Service\ValidateConfigurationService
+    arguments:
+      - "@baboon.tools_service"
