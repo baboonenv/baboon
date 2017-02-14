@@ -2,16 +2,12 @@
 
 namespace Baboon\AppBundle\Command;
 
-use Baboon\PanelBundle\Service\ToolsService;
-use Doctrine\ORM\EntityManager;
+use Baboon\PanelBundle\Service\ValidateConfigurationService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Class ValidateBaboonConfigurationCommand
@@ -19,11 +15,6 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class ValidateBaboonConfigurationCommand extends ContainerAwareCommand
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
     /**
      * @var SymfonyStyle
      */
@@ -35,14 +26,9 @@ class ValidateBaboonConfigurationCommand extends ContainerAwareCommand
     private $container;
 
     /**
-     * @var TranslatorInterface
+     * @var ValidateConfigurationService
      */
-    private $translator;
-
-    /**
-     * @var ToolsService
-     */
-    private $tools;
+    private $validate;
 
     /**
      *
@@ -63,9 +49,7 @@ class ValidateBaboonConfigurationCommand extends ContainerAwareCommand
     {
         $this->io           = new SymfonyStyle($input, $output);
         $this->container    = $this->getContainer();
-        $this->em           = $this->container->get('doctrine')->getManager();
-        $this->translator   = $this->container->get('translator');
-        $this->tools        = $this->container->get('baboon.tools_service');
+        $this->validate     = $this->container->get('baboon.panel.validate_configuration');
     }
 
     /**
@@ -77,8 +61,17 @@ class ValidateBaboonConfigurationCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->io->title($this->getDescription());
-        $confData['baboon'] = $config1 = Yaml::parse(
-            file_get_contents($this->tools->getSourceDir().'.baboon.yml')
-        );
+        $errors = $this->validate->validate();
+        if(count($errors)<1){
+            $this->io->success('your.configuration.file.is.valid');
+
+            return;
+        }
+
+        foreach ($errors as $error){
+            $this->io->error($error);
+        }
+
+        return;
     }
 }
