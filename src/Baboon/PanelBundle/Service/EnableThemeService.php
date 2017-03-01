@@ -17,6 +17,11 @@ class EnableThemeService
     private $tools;
 
     /**
+     * @var ValidateConfigurationService
+     */
+    private $confValidator;
+
+    /**
      * @var string
      */
     private $themeZipUri;
@@ -40,10 +45,12 @@ class EnableThemeService
      * EnableThemeService constructor.
      *
      * @param ToolsService $toolsService
+     * @param ValidateConfigurationService $confValidator
      */
-    public function __construct(ToolsService $toolsService)
+    public function __construct(ToolsService $toolsService, ValidateConfigurationService $confValidator)
     {
-        $this->tools = $toolsService;
+        $this->tools            = $toolsService;
+        $this->confValidator    = $confValidator;
     }
 
     /**
@@ -86,10 +93,9 @@ class EnableThemeService
 
     private function setupSiteDirs()
     {
-        $this->tools->deleteDir($this->tools->getSiteDir());
-        $this->tools->createDir($this->tools->getSiteDir());
-        $this->tools->createDir($this->tools->getSourceDir());
-        $this->tools->createDir($this->tools->getRenderDir());
+        $this->tools->deleteFile($this->tools->getSiteDir().'data.json');
+        $this->tools->cleanDir($this->tools->getSourceDir());
+        $this->tools->cleanDir($this->tools->getRenderDir());
     }
 
     /**

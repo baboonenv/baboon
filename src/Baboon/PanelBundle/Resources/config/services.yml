@@ -11,6 +11,7 @@ services:
     class: Baboon\PanelBundle\Service\EnableThemeService
     arguments:
       - "@baboon.tools_service"
+      - "@baboon.panel.validate_configuration"
 
   baboon.panel.theme_configuration_service:
     class: Baboon\PanelBundle\Service\ThemeConfigurationService
