@@ -23,7 +23,7 @@
 
 # Assets and user uploads
 /web/bundles/
-/web/uploads/
+/web/uploads/*
 
 # PHPUnit
 /app/phpunit.xml
@@ -50,7 +50,12 @@ web/vendor/*
 web/js
 web/css
 # baboon site related dirs
-/web/_site/*
+web/_site/_render/*
+!web/_site/_render/.gitkeep
+web/_site/_source/*
+!web/_site/_source/.gitkeep
+web/_site/data.json
+!web/_site/.gitkeep
 /web/_themes/*
 
 #sqlite dataabase
