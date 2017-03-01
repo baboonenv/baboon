@@ -46,7 +46,8 @@
         "jbouzekri/file-uploader-bundle": "dev-master",
         "mopa/bootstrap-bundle": "^3.1",
         "twbs/bootstrap": "^3.3",
-        "coyl/git": "dev-master"
+        "coyl/git": "dev-master",
+        "beelab/bowerphp": "^0.4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
