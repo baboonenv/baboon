@@ -19,3 +19,9 @@ bb_panel_get_asset_wrap:
     defaults: { _controller: BaboonPanelBundle:Configuration:getAssetWrap }
     options:
         expose: true
+
+bb_panel_add_new_item:
+    path:     /configure/add/new/item
+    defaults: { _controller: BaboonPanelBundle:Configuration:addNewItem }
+    options:
+        expose: true

@@ -57,6 +57,15 @@ $(document).ready(function() {
                 return;
             }
             $('#asset-data-wrap').val($fileVal);
+        },
+        addNewField: function ($this) {
+            var wrapDiv = $('#asset-'+$assetKey+'-wrap-div');
+            var loadAssetPath = Routing.generate('bb_panel_get_asset_wrap', {
+                'assetKey': $assetKey
+            });
+            $.get(loadAssetPath, function(data){
+                wrapDiv.html(data);
+            });
         }
     };
 });

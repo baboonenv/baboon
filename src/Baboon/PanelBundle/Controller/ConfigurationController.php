@@ -119,4 +119,20 @@ class ConfigurationController extends Controller
             'assetKey' => $assetKey,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $assetKey
+     * @return Response
+     */
+    public function addNewItemAction(Request $request, $assetKey)
+    {
+        $confService = $this->get('baboon.panel.theme_configuration_service');
+        $confData = $confService->collectConfigurationData();
+
+        return $this->render('@BaboonPanel/Configuration/_widgets/_asset_wrap.html.twig', [
+            'asset' => $confData['assets'][$assetKey],
+            'assetKey' => $assetKey,
+        ]);
+    }
 }

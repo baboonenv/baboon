@@ -1,5 +1,13 @@
 {% for assetKey, asset in data.assets %}
     <div class="well well-sm col-sm-12" id="asset-{{ assetKey }}-wrap-div">
         {{ include('BaboonPanelBundle:Configuration/_widgets:_asset_wrap.html.twig') }}
+        {% if asset.multiple is defined and asset.multiple %}
+            <div class="col-sm-12">
+                <button class="btn btn-success btn-sm pull-right" onclick="ConfigureAsset.addNewField()">
+                    <i class="fa fa-plus"></i>
+                    {{ 'add.new'|trans }}
+                </button>
+            </div>
+        {% endif %}
     </div>
 {% endfor %}

@@ -105,18 +105,22 @@ class EnableThemeService
         return true;
     }
 
-    private function normalizeConfigurationAssets($assets)
+    private function normalizeConfigurationAssets($assets, $parentUnique = '')
     {
         foreach ($assets as $assetKey => $asset){
 
             if($asset['type'] == AssetTypes::TREE){
 
-                $asset['multiple'] = true;
-                $asset['assets'] = $this->normalizeConfigurationAssets($asset['assets']);
+                $newParentUnique = empty($parentUnique)? $assetKey: $parentUnique.'.'.$assetKey;
+                $asset['assets'][] = $this->normalizeConfigurationAssets($asset['assets'], $newParentUnique);
             }else{
-
-                $asset['value'] = $asset['default'];
+                if(isset($asset['multiple']) && $asset['multiple'] == true){
+                    $asset['values'][] = $asset['default'];
+                }else{
+                    $asset['value'] = $asset['default'];
+                }
                 $asset['isDefaultValue'] = true;
+                $asset['uniqueKey'] = empty($parentUnique) ? $assetKey: $parentUnique.'.'.$assetKey;
             }
             $assets[$assetKey] = $asset;
         }
