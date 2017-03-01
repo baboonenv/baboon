@@ -43,3 +43,10 @@ services:
     class: Baboon\PanelBundle\Service\ValidateConfigurationService
     arguments:
       - "@baboon.tools_service"
+
+  baboon.panel.dynamic_form:
+    class: Baboon\PanelBundle\Service\DynamicFormService
+    arguments:
+      - "@baboon.tools_service"
+      - "@request_stack"
+      - "@form.factory"

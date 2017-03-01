@@ -2,6 +2,10 @@ bb_panel_configuration:
     path:     /
     defaults: { _controller: BaboonPanelBundle:Configuration:configuration }
 
+bb_panel_dynamic_configuration:
+    path:     /dynamic
+    defaults: { _controller: BaboonPanelBundle:Configuration:dynamicConfiguration }
+
 bb_panel_field_configure:
     path:     /configure
     defaults: { _controller: BaboonPanelBundle:Configuration:configure }

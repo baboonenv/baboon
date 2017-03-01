@@ -41,7 +41,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
-        - 'JbFileUploaderBundle:Form:fields.html.twig'
+        - '::uploadfields.html.twig'
 
 # Swiftmailer Configuration
 swiftmailer:

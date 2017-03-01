@@ -29,6 +29,19 @@ class ConfigurationController extends Controller
      * @param Request $request
      * @return Response
      */
+    public function dynamicConfigurationAction(Request $request)
+    {
+        $dynamicFormService = $this->get('baboon.panel.dynamic_form');
+
+        return $this->render('BaboonPanelBundle:Configuration:dynamic.html.twig', [
+            'form' => $dynamicFormService->generateForm()->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function configureAction(Request $request)
     {
         $confService = $this->get('baboon.panel.theme_configuration_service');

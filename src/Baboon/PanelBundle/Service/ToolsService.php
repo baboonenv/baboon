@@ -216,4 +216,9 @@ class ToolsService
     {
         return $this->getRootDir().'/../web/_themes/';
     }
+
+    public function getSiteData()
+    {
+        return json_decode($this->getContent($this->getSiteDir().'data.json'), true);
+    }
 }
