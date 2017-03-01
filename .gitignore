@@ -37,7 +37,6 @@
 
 ### Composer ###
 composer.phar
-composer.lock
 web/vendor/*
 
 # Backup entities generated with doctrine:generate:entities command
