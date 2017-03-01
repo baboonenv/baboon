@@ -62,7 +62,6 @@ class EnableThemeService
         $this->setupVars($zipUri);
         $zipFileContent = $this->tools->getContent($this->themeZipUri);
         $this->tools->createDir($this->themeDir);
-        $this->setupSiteDirs();
 
         file_put_contents($this->cloneThemePath, $zipFileContent);
         $zip = new \ZipArchive();
@@ -73,6 +72,13 @@ class EnableThemeService
             unlink($this->cloneThemePath);
         }
         $this->normalizeThemeDir();
+
+        $this->confValidator->setConfigFile($this->themeDir.'.baboon.yml');
+        $errors = $this->confValidator->validate();
+        if(!empty($errors)){
+            throw new \LogicException(implode("\n", $errors));
+        }
+        $this->setupSiteDirs();
         $this->tools->moveFilesToDir($this->themeDir, $this->tools->getSourceDir(), false);
         $this->tools->moveFilesToDir($this->themeDir, $this->tools->getRenderDir(), false);
         $this->generateDataFile();

@@ -66,9 +66,16 @@ class ValidateConfigurationService
         return $this->getErrors();
     }
 
+    public function setConfigFile(string $configFile)
+    {
+        $this->configurationFile = $configFile;
+    }
+
     private function setupVars()
     {
-        $this->configurationFile = $this->tools->getSourceDir().'.baboon.yml';
+        if(empty($this->configurationFile)){
+            $this->configurationFile = $this->tools->getSourceDir().'.baboon.yml';
+        }
     }
 
     private function getErrors()
