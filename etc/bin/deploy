@@ -2,7 +2,7 @@
 git pull origin master &&
 find ./var/cache -type f -delete &&
 rm -rf ./var/logs/* &&
-composer update &&
+composer install &&
 php bin/console cache:clear &&
 php bin/console assetic:dump &&
 php bin/console d:s:u --env=dev --dump-sql &&
