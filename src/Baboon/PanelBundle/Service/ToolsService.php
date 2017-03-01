@@ -52,12 +52,28 @@ class ToolsService
 
     /**
      * @param string $path
-     * @param array $excludeDirs
-     * @param bool $removeTopParent
      *
      * @return bool
      */
-    public function cleanDir(string $path, array $excludeDirs = ['.git'], $removeTopParent = false) : bool
+    public function deleteFile(string $path) : bool
+    {
+        if (!is_file($path)) {
+            return true;
+        }
+        unlink($path);
+
+        return true;
+    }
+
+    /**
+     * @param string $path
+     * @param array $excludeDirs
+     * @param bool $removeTopParent
+     * @param array $excludeFiles
+     *
+     * @return bool
+     */
+    public function cleanDir(string $path, array $excludeDirs = ['.git'], $removeTopParent = false, array $excludeFiles = ['.gitkeep']) : bool
     {
         if (is_dir($path)) {
             $objects = scandir($path);
@@ -68,7 +84,9 @@ class ToolsService
                             $this->cleanDir($path."/".$object, [], true);
                         }
                     }else{
-                        unlink($path."/".$object);
+                        if(!in_array($object, $excludeFiles)){
+                            unlink($path."/".$object);
+                        }
                     }
                 }
             }
