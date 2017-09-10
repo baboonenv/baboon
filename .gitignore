@@ -53,6 +53,8 @@ web/_site/_render/*
 !web/_site/_render/.gitkeep
 web/_site/_source/*
 !web/_site/_source/.gitkeep
+web/_site/_uploads/*
+!web/_site/_uploads/.gitkeep
 web/_site/data.json
 !web/_site/.gitkeep
 /web/_themes/*
@@ -60,3 +62,5 @@ web/_site/data.json
 
 #sqlite dataabase
 app/data.db3
+
+.idea/
