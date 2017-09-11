@@ -96,7 +96,9 @@ class DeployThemeService
                 }
             }
             if($asset['type'] == AssetTypes::TREE){
-                $assets[$assetKey] = $this->normalizeAssetsData($asset['assets']);
+                foreach ($asset['assets'] as $item){
+                    $assets[$assetKey] = $this->normalizeAssetsData($item);
+                }
             }else{
                 $assets[$assetKey] = $asset['value'];
             }
