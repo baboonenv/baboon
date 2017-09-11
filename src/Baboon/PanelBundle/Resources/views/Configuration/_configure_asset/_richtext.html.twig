@@ -3,7 +3,7 @@
     <textarea class="form-control" id="asset-data-wrap">{{ asset.value }}</textarea>
     <br>
     <div class="well well-sm">
-        <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ assetKey }}')">
+        <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ asset.path }}')">
             {{ 'save.value'|trans }}
         </button>
         <br>

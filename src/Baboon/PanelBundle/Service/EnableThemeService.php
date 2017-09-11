@@ -117,16 +117,19 @@ class EnableThemeService
         return true;
     }
 
-    private function normalizeConfigurationAssets($assets)
+    private function normalizeConfigurationAssets($assets, $path = '[assets]')
     {
         foreach ($assets as $assetKey => $asset){
-
+            $asset['path'] = $path.'['.$assetKey.']';
             if($asset['type'] == AssetTypes::TREE){
 
+                $randString = $this->generateRandomString(5);
+                $itemPath = $asset['path'].'[assets]['.$randString.']';
                 $asset['multiple'] = true;
-                $asset['assets'] = $this->normalizeConfigurationAssets($asset['assets']);
+                $fieldAssets = $asset['assets'];
+                $asset['assets'] = null;
+                $asset['assets'][$randString] = $this->normalizeConfigurationAssets($fieldAssets, $itemPath);
             }else{
-
                 $asset['value'] = $asset['default'];
                 $asset['isDefaultValue'] = true;
             }
@@ -160,5 +163,16 @@ class EnableThemeService
         }
 
         return false;
+    }
+
+    public function generateRandomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

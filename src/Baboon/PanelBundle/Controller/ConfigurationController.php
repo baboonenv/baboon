@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ConfigurationController extends Controller
 {
@@ -31,14 +32,14 @@ class ConfigurationController extends Controller
      */
     public function configureAction(Request $request)
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
         $confService = $this->get('baboon.panel.theme_configuration_service');
-        $assetKey = $request->get('assetKey');
-        $asset = $confService->collectConfigurationData()['assets'][$assetKey];
+        $assetPath = $request->get('assetPath');
+        $asset = $accessor->getValue($confService->collectConfigurationData(), $assetPath);
 
         $assetParams = $this->collectAssetParams($asset);
         return $this->render('@BaboonPanel/Configuration/_configure_asset/_'.$asset['type'].'.html.twig', [
             'asset'         => $asset,
-            'assetKey'      => $assetKey,
             'assetParams'   => $assetParams,
         ]);
     }
@@ -82,20 +83,23 @@ class ConfigurationController extends Controller
      */
     public function saveAssetValueAction(Request $request)
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
         $confService = $this->get('baboon.panel.theme_configuration_service');
 
-        $assetKey = $request->get('assetKey');
+        $assetPath = $request->get('assetPath');
         $assetValue = $request->get('value');
 
         $confData = $confService->collectConfigurationData();
+        $asset = $accessor->getValue($confData, $assetPath);
 
-        if($confData['assets'][$assetKey]['type'] == AssetTypes::IMAGE){
+        if($asset['type'] == AssetTypes::IMAGE){
             $assetValue = '/_site/_uploads/croped/'.$assetValue;
-        }elseif($confData['assets'][$assetKey]['type'] == AssetTypes::FILE){
+        }elseif($asset['type'] == AssetTypes::FILE){
             $assetValue = '/_site/_uploads/'.$assetValue;
         }
-        $confData['assets'][$assetKey]['value'] = $assetValue;
-        $confData['assets'][$assetKey]['isDefaultValue'] = false;
+        $asset['value'] = $assetValue;
+        $asset['isDefaultValue'] = false;
+        $accessor->setValue($confData, $assetPath, $asset);
 
         $confService->saveConfigurationData($confData);
 
@@ -106,17 +110,18 @@ class ConfigurationController extends Controller
 
     /**
      * @param Request $request
-     * @param string $assetKey
+     * @param string $assetPath
      * @return Response
      */
-    public function getAssetWrapAction(Request $request, $assetKey)
+    public function getAssetWrapAction(Request $request, string $assetPath)
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
         $confService = $this->get('baboon.panel.theme_configuration_service');
         $confData = $confService->collectConfigurationData();
+        $asset = $accessor->getValue($confData, $assetPath);
 
         return $this->render('@BaboonPanel/Configuration/_widgets/_asset_wrap.html.twig', [
-            'asset' => $confData['assets'][$assetKey],
-            'assetKey' => $assetKey,
+            'asset' => $asset,
         ]);
     }
 }

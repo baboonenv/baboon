@@ -1,7 +1,7 @@
 <div class="col-sm-12">
     <div class="col-sm-2">
         {% if asset.type != 'tree' %}
-            <button class="btn btn-primary btn-xs" onclick="ConfigureAsset.configureField(this, '{{ assetKey }}')">
+            <button class="btn btn-primary btn-xs" onclick="ConfigureAsset.configureField(this, '{{ asset.path }}')">
                 <i class="fa fa-cogs"></i>
                 {{ 'configure'|trans }}
             </button>

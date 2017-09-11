@@ -1,10 +1,10 @@
 $(document).ready(function() {
     ConfigureAsset = {
-        configureField: function ($this, $assetKey) {
+        configureField: function ($this, $assetPath) {
             $.fancybox({
                 type: 'ajax',
                 href: Routing.generate('bb_panel_field_configure', {
-                    assetKey: $assetKey
+                    assetPath: $assetPath
                 }),
                 autoSize: false,
                 width: '600px',
@@ -17,11 +17,11 @@ $(document).ready(function() {
                 }
             });
         },
-        saveAssetValue: function ($this, $assetKey) {
+        saveAssetValue: function ($this, $assetPath) {
             var savePath = Routing.generate('bb_panel_field_save_asset_value');
             var value = $('#asset-data-wrap').val();
             $.post(savePath, {
-                assetKey: $assetKey,
+                assetPath: $assetPath,
                 value   : value
             }, function(data){
                 if(data.success == true){
@@ -30,15 +30,15 @@ $(document).ready(function() {
                         text: 'Asset field value successfully updated!',
                         timeout: 2000
                     });
-                    ConfigureAsset.loadAssetWrap($assetKey);
+                    ConfigureAsset.loadAssetWrap($assetPath);
                     $.fancybox.close();
                 }
             });
         },
-        loadAssetWrap: function ($assetKey) {
-            var wrapDiv = $('#asset-'+$assetKey+'-wrap-div');
+        loadAssetWrap: function ($assetPath) {
+            var wrapDiv = $('[data-path="'+$assetPath+'"]');
             var loadAssetPath = Routing.generate('bb_panel_get_asset_wrap', {
-                'assetKey': $assetKey
+                'assetPath': $assetPath
             });
             $.get(loadAssetPath, function(data){
                 wrapDiv.html(data);

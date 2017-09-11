@@ -20,7 +20,7 @@
     $('#asset-form').validator().on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
-            ConfigureAsset.saveAssetValue(this, '{{ assetKey }}');
+            ConfigureAsset.saveAssetValue(this, '{{ asset.path }}');
         }
     })
 </script>

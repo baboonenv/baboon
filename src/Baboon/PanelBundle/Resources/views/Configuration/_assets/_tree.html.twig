@@ -1,5 +1,3 @@
-{% for assetKey, asset in asset.assets %}
-    <div class="well well-sm col-sm-12" id="asset-{{ assetKey }}-wrap-div">
-        {{ include('BaboonPanelBundle:Configuration/_widgets:_asset_wrap.html.twig') }}
-    </div>
+{% for item in asset.assets %}
+    {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': item} %}
 {% endfor %}

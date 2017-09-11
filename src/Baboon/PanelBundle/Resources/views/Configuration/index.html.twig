@@ -23,5 +23,5 @@
 {% endblock %}
 
 {% block content %}
-    {{ include('BaboonPanelBundle:Configuration/_widgets:_assets.html.twig') }}
+    {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': data.assets} %}
 {% endblock %}
