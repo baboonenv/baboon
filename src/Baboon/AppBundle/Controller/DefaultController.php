@@ -29,7 +29,9 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('File can not be found');
         }
         $content = file_get_contents($resultDir);
+        $response = new Response($content);
+        $response->headers->set('Content-Type', mime_content_type($resultDir));
 
-        return new Response($content);
+        return $response;
     }
 }
