@@ -45,19 +45,19 @@ $(document).ready(function() {
                 wrapDiv.find('.collapse').addClass('in');
             });
         },
-        refreshImageValue: function () {
+        refreshImageValue: function ($assetPathId) {
             var $imageVal = $('#upload_image_image').val();
             if($imageVal == ''){
                 return;
             }
-            $('#asset-data-wrap').val($imageVal);
+            $('[data-path-id="'+$assetPathId+'"]').val($imageVal);
         },
-        refreshFileValue: function () {
+        refreshFileValue: function ($assetPathId) {
             var $fileVal = $('#upload_file_file').val();
             if($fileVal == ''){
                 return;
             }
-            $('#asset-data-wrap').val($fileVal);
+            $('[data-path-id="'+$assetPathId+'"]').val($fileVal);
         },
         addItem: function ($this, $assetPath) {
             console.log($assetPath);

@@ -1,7 +1,7 @@
 <div class="well well-sm">
     <legend class="text-center">{{ 'configure' }}: {{ asset.label }}</legend>
     {{ form(assetParams.form) }}
-    <input type="hidden" id="asset-data-wrap">
+    <input type="hidden" id="asset-data-wrap" data-path-id="{{ asset.path|transform_id }}">
     <br>
     <div class="well well-sm">
         <button class="btn btn-sm btn-primary pull-right" onclick="ConfigureAsset.saveAssetValue(this, '{{ asset.path }}')">
@@ -15,6 +15,6 @@
 <script>
     $('.jb_fileupload').jbFileUpload();
     setInterval(function(){
-        ConfigureAsset.refreshFileValue();
+        ConfigureAsset.refreshFileValue('{{ asset.path|transform_id }}');
     }, 1000);
 </script>
