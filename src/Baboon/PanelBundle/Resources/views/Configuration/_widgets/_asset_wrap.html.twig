@@ -5,6 +5,11 @@
                 <i class="fa fa-cogs"></i>
                 {{ 'configure'|trans }}
             </button>
+        {% else %}
+            <button class="btn btn-warning btn-xs" onclick="ConfigureAsset.addItem(this, '{{ asset.path }}')">
+                <i class="fa fa-plus-square"></i>
+                {{ 'add.item'|trans }}
+            </button>
         {% endif %}
     </div>
     <div class="col-sm-8">

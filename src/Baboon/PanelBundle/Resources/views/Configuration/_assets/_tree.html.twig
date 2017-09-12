@@ -1,3 +1,5 @@
 {% for item in asset.assets %}
-    {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': item} %}
+    <div class="well well-sm col-sm-12" data-path="tree-{{ asset.path }}-wrapper">
+        {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': item} %}
+    </div>
 {% endfor %}

@@ -57,6 +57,29 @@ $(document).ready(function() {
                 return;
             }
             $('#asset-data-wrap').val($fileVal);
+        },
+        addItem: function ($this, $assetPath) {
+            console.log($assetPath);
+            var wrapDiv = $('[data-path="tree-'+$assetPath+'-wrapper"]');
+            var loadAssetPath = Routing.generate('bb_panel_tree_add_item', {
+                'assetPath': $assetPath
+            });
+            $.get(loadAssetPath, function(data){
+                wrapDiv.append(data);
+            });
         }
     };
+    $.each($('.well-sm'), function(key, value){
+        $(value).css('border-color', getRandomColor());
+    })
 });
+
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
