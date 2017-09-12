@@ -43,3 +43,8 @@ services:
     class: Baboon\PanelBundle\Service\ValidateConfigurationService
     arguments:
       - "@baboon.tools_service"
+
+  baboon.twig.baboon_extension:
+      class: Baboon\PanelBundle\Service\Twig\BaboonExtension
+      tags:
+          - { name: twig.extension }
