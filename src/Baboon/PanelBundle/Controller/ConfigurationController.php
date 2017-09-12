@@ -132,27 +132,11 @@ class ConfigurationController extends Controller
      */
     public function addTreeItemAction(Request $request, string $assetPath)
     {
-        $accessor = PropertyAccess::createPropertyAccessor();
         $confService = $this->get('baboon.panel.theme_configuration_service');
-        $confData = $confService->collectConfigurationData();
-        $asset = $accessor->getValue($confData, $assetPath);
-        $originalItem = array_values($asset['assets'])[0];
-        $accessor->setValue($confData, $assetPath.'[assets]['.$this->generateRandomString(5).']', $originalItem);
+        $originalItem = $confService->addTreeItem($assetPath);
 
-        $confService->saveConfigurationData($confData);
         return $this->render('@BaboonPanel/Configuration/_widgets/_assets.html.twig', [
             'assets' => $originalItem,
         ]);
-    }
-
-    private function generateRandomString($length = 10)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }

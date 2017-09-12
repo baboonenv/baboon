@@ -127,6 +127,7 @@ class EnableThemeService
                 $itemPath = $asset['path'].'[assets]['.$randString.']';
                 $asset['multiple'] = true;
                 $fieldAssets = $asset['assets'];
+                $asset['original_assets'] = $fieldAssets;
                 $asset['assets'] = null;
                 $asset['assets'][$randString] = $this->normalizeConfigurationAssets($fieldAssets, $itemPath);
             }else{
