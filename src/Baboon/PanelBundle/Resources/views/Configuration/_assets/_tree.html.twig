@@ -1,5 +1,10 @@
 {% for item in asset.assets %}
-    <div class="well well-sm col-sm-12" data-path="tree-{{ asset.path }}-wrapper">
+    {% if asset.original_assets|length == 1 %}
+        {% set well = '' %}
+    {% else %}
+        {% set well = 'well well-sm' %}
+    {% endif %}
+    <div class="{{ well }} col-sm-12 _tree">
         {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': item} %}
     </div>
 {% endfor %}

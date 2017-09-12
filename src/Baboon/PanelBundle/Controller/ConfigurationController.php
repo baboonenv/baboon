@@ -133,10 +133,10 @@ class ConfigurationController extends Controller
     public function addTreeItemAction(Request $request, string $assetPath)
     {
         $confService = $this->get('baboon.panel.theme_configuration_service');
-        $originalItem = $confService->addTreeItem($assetPath);
+        $templateAsset = $confService->addTreeItem($assetPath);
 
-        return $this->render('@BaboonPanel/Configuration/_widgets/_assets.html.twig', [
-            'assets' => $originalItem,
+        return $this->render('@BaboonPanel/Configuration/_assets/_tree.html.twig', [
+            'asset' => $templateAsset,
         ]);
     }
 }

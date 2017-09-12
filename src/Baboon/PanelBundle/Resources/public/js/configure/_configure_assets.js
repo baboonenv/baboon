@@ -60,7 +60,7 @@ $(document).ready(function() {
         },
         addItem: function ($this, $assetPath) {
             console.log($assetPath);
-            var wrapDiv = $('[data-path="tree-'+$assetPath+'-wrapper"]');
+            var wrapDiv = $('[data-path="'+$assetPath+'"]').find('.panel-body:eq(0)');
             var loadAssetPath = Routing.generate('bb_panel_tree_add_item', {
                 'assetPath': $assetPath
             });

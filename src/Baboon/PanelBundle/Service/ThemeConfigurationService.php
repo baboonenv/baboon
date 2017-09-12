@@ -58,7 +58,10 @@ class ThemeConfigurationService
 
         $this->saveConfigurationData($confData);
 
-        return $normalizedAssets;
+        $asset['assets'] = [];
+        $asset['assets'][$randomString] = $normalizedAssets;
+
+        return $asset;
     }
 
     private function normalizeConfigurationAssets($assets, $path = '[assets]')
