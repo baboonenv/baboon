@@ -1,10 +1,10 @@
-{% for item in asset.assets %}
-    {% if asset.original_assets|length == 1 %}
-        {% set well = '' %}
-    {% else %}
-        {% set well = 'well well-sm' %}
-    {% endif %}
-    <div class="{{ well }} col-sm-12 _tree">
+{% for key, item in asset.assets %}
+    <div class="well well-sm col-sm-12 _tree" data-path="{{ asset.path~'[assets]['~key~']' }}">
         {% include 'BaboonPanelBundle:Configuration/_widgets:_assets.html.twig' with {'assets': item} %}
+        <hr>
+        <button class="btn btn-danger btn-xs pull-right" onclick="ConfigureAsset.deleteItem(this, '{{ asset.path }}', '{{ key }}')">
+            <i class="fa fa-trash-o"></i>
+            {{ 'remove.item'|trans }}
+        </button>
     </div>
 {% endfor %}

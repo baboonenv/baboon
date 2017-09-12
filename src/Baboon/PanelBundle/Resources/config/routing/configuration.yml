@@ -25,3 +25,9 @@ bb_panel_tree_add_item:
     defaults: { _controller: BaboonPanelBundle:Configuration:addTreeItem }
     options:
         expose: true
+
+bb_panel_tree_delete_item:
+    path:     /configure/delete/tree/item/{assetPath}/{itemKey}
+    defaults: { _controller: BaboonPanelBundle:Configuration:deleteTreeItem }
+    options:
+        expose: true

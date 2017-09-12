@@ -139,4 +139,19 @@ class ConfigurationController extends Controller
             'asset' => $templateAsset,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param string $assetPath
+     * @return Response
+     */
+    public function deleteTreeItemAction(Request $request, string $assetPath, string $itemKey)
+    {
+        $confService = $this->get('baboon.panel.theme_configuration_service');
+        $confService->deleteTreeItem($assetPath, $itemKey);
+
+        return new JsonResponse([
+            'success' => true,
+        ]);
+    }
 }

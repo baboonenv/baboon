@@ -64,6 +64,18 @@ class ThemeConfigurationService
         return $asset;
     }
 
+    public function deleteTreeItem(string $assetPath, string $itemKey)
+    {
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $confData = $this->collectConfigurationData();
+        $assetData = $accessor->getValue($confData, $assetPath);
+        unset($assetData['assets'][$itemKey]);
+        $accessor->setValue($confData, $assetPath, $assetData);
+        $this->saveConfigurationData($confData);
+
+        return true;
+    }
+
     private function normalizeConfigurationAssets($assets, $path = '[assets]')
     {
         foreach ($assets as $assetKey => $asset){

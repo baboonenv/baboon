@@ -67,6 +67,17 @@ $(document).ready(function() {
             $.get(loadAssetPath, function(data){
                 wrapDiv.append(data);
             });
+        },
+        deleteItem: function ($this, $assetPath, $itemKey) {
+            console.log($assetPath);
+            var deleteDiv = $('[data-path="'+$assetPath+'[assets]['+$itemKey+']"]');
+            var deleteItemPath = Routing.generate('bb_panel_tree_delete_item', {
+                'assetPath': $assetPath,
+                'itemKey': $itemKey
+            });
+            $.get(deleteItemPath, function(data){
+                deleteDiv.remove();
+            });
         }
     };
 });
