@@ -42,6 +42,7 @@ $(document).ready(function() {
             });
             $.get(loadAssetPath, function(data){
                 wrapDiv.html(data);
+                wrapDiv.find('.collapse').addClass('in');
             });
         },
         refreshImageValue: function () {
