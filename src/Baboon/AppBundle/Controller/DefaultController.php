@@ -17,6 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request, $path = null)
     {
+        $mimeTypes = $this->generateUpToDateMimeArray();
         $path = $this->get('request_stack')->getMasterRequest()->getPathInfo();
         $pathInfo = pathinfo($path);
         $appDir = $this->get('kernel')->getRootDir();
@@ -28,10 +29,28 @@ class DefaultController extends Controller
         if(!file_exists($resultDir)){
             throw new NotFoundHttpException('File can not be found');
         }
+        $explodeDir = explode('.', $resultDir);
+        $explodeDir = explode('?', end($explodeDir))[0];
+        $mimeType = isset($mimeTypes[$explodeDir])?$mimeTypes[$explodeDir]: 'text/plain';
         $content = file_get_contents($resultDir);
         $response = new Response($content);
-        $response->headers->set('Content-Type', mime_content_type($resultDir));
+        $response->headers->set('Content-Type', $mimeType);
 
         return $response;
+    }
+
+    private function generateUpToDateMimeArray()
+    {
+        $path = $this->get('kernel')->getRootDir().'/config/mime.types';
+        $s=array();
+        foreach(@explode("\n",@file_get_contents($path))as $x){
+            if(isset($x[0])&&$x[0]!=='#'&&preg_match_all('#([^\s]+)#',$x,$out)&&isset($out[1])&&($c=count($out[1]))>1){
+                for($i=1;$i<$c;$i++){
+                    $s[$out[1][$i]]= $out[1][0];
+                }
+            }
+        }
+
+        return $s;
     }
 }
