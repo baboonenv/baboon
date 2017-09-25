@@ -24,8 +24,5 @@ app_main:
     condition: 'not (context.getPathInfo() matches "/_site/")'
 
 app:
-    path:     /{path}
+    path:     /
     defaults: { _controller: "BaboonAppBundle:Default:index" }
-    condition: 'not (context.getPathInfo() matches "/_site/")'
-    requirements:
-        path: .+
