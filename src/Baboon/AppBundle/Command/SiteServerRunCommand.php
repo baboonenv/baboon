@@ -12,10 +12,10 @@ use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Bundle\FrameworkBundle\Command\ServerCommand;
 
 /**
- * Class ServerRunCommand
+ * Class SiteServerRunCommand
  * @package Baboon\AppBundle\Command
  */
-class ServerRunCommand extends ServerCommand
+class SiteServerRunCommand extends ServerCommand
 {
     /**
      * {@inheritdoc}
@@ -29,33 +29,8 @@ class ServerRunCommand extends ServerCommand
                 new InputOption('docroot', 'd', InputOption::VALUE_REQUIRED, 'Document root', null),
                 new InputOption('router', 'r', InputOption::VALUE_REQUIRED, 'Path to custom router script'),
             ))
-            ->setName('baboon:server:run')
+            ->setName('baboon:site:server:run')
             ->setDescription('Runs PHP built-in web server')
-            ->setHelp(<<<'EOF'
-The <info>%command.name%</info> runs PHP built-in web server:
-
-  <info>%command.full_name%</info>
-
-To change default bind address and port use the <info>address</info> argument:
-
-  <info>%command.full_name% 127.0.0.1:8080</info>
-
-To change default docroot directory use the <info>--docroot</info> option:
-
-  <info>%command.full_name% --docroot=htdocs/</info>
-
-If you have custom docroot directory layout, you can specify your own
-router script using <info>--router</info> option:
-
-  <info>%command.full_name% --router=app/config/router.php</info>
-
-Specifing a router script is required when the used environment is not "dev",
-"prod", or "test".
-
-See also: http://www.php.net/manual/en/features.commandline.webserver.php
-
-EOF
-            )
         ;
     }
 
@@ -97,7 +72,7 @@ EOF
         $io->success(sprintf('Server running on http://%s', $address));
         $io->comment('Quit the server with CONTROL-C.');
 
-        if (null === $builder = $this->createPhpProcessBuilder($io, $address, $input->getOption('router'), $env)) {
+        if (null === $builder = $this->createPhpProcessBuilder($io, $address)) {
             return 1;
         }
 
@@ -126,21 +101,10 @@ EOF
         return $process->getExitCode();
     }
 
-    private function createPhpProcessBuilder(SymfonyStyle $io, $address, $router, $env)
+    private function createPhpProcessBuilder(SymfonyStyle $io, $address)
     {
-        $router = $router ?: $this
-            ->getContainer()
-            ->get('kernel')
-            ->locateResource(sprintf('@FrameworkBundle/Resources/config/router_%s.php', $env))
-        ;
+        $siteRenderDir = realpath($this->getContainer()->get('baboon.tools_service')->getRenderDir());
 
-        if (!file_exists($router)) {
-            $io->error(sprintf('The given router script "%s" does not exist.', $router));
-
-            return;
-        }
-
-        $router = realpath($router);
         $finder = new PhpExecutableFinder();
 
         if (false === $binary = $finder->find()) {
@@ -149,6 +113,6 @@ EOF
             return;
         }
 
-        return new ProcessBuilder(array($binary, '-S', $address, $router));
+        return new ProcessBuilder(array($binary, '-S', $address, '-t', $siteRenderDir));
     }
 }
