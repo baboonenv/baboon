@@ -104,7 +104,7 @@ class SetupSandboxCommand extends ContainerAwareCommand
 
         $serverUrl = 'http://server.baboonenv.com';
         $jsonConfiguration = file_get_contents($serverUrl.'/configuration');
-        $configuration = json_decode($jsonConfiguration);
+        $configuration = json_decode($jsonConfiguration, true);
         $themeServer = new ThemeServer();
         $themeServer
             ->setName($configuration['name'])
